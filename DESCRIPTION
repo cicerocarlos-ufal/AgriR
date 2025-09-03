@@ -1,0 +1,12 @@
+Package: AgriR
+Title: Experimental design statistics
+Version: 0.1
+Authors@R: 
+    person("Cícero", "Almeida", , "cicero@arapiraca.ufal.br", role = c("aut", "cre"))
+Description: Functions for Experimental design statistics.
+License: GPL-3
+Encoding: UTF-8
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
