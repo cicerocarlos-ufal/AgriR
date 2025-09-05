@@ -5,7 +5,7 @@
 #' Otherwise, the URL will be printed for manual access.
 #' @export
 runMenuAgriR <- function() {
-  appDir <- system.file("shiny", "menu_agriR", package = "AgriR")
+  appDir <- system.file("shiny", package = "AgriR")
   if (appDir == "") stop("App directory not found in the package")
   
   shiny::runApp(appDir, launch.browser = TRUE)  # força abrir no navegador
