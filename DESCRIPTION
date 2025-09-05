@@ -12,4 +12,5 @@ Suggests:
 Config/testthat/edition: 3
 Depends:
     R (>= 4.0),
-    ggplot2
+    ggplot2,
+    shiny
