@@ -27,7 +27,7 @@ library(AgriR)
 
 ##  Basic usage
 
-After installation and loading:
+**After installation and loading:**
 
 library(AgriR)
 
@@ -61,12 +61,3 @@ Contributing
 
 Suggestions, bug reports and pull requests are welcome.
 Please open an issue on GitHub
-
-
----
-
-Você pode copiar esse conteúdo para um arquivo `README.md` na raiz do seu repositório.  
-Quer que eu já monte um exemplo também com **badges** (R-CMD-check, CRAN status etc.) igual aos pacotes tidyverse?
-
-
-
