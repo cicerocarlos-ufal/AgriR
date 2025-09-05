@@ -25,21 +25,29 @@ devtools::install_github("cicerocarlos-ufal/AgriR")
 # Load the package
 library(AgriR)
 
-Basic usage
+##  Basic usage
 
 After installation and loading:
 
 library(AgriR)
 
-# Run the included Shiny application
+## Run the included Shiny application
 runMenuAgriR()
 
 List all available functions:
 
 ls("package:AgriR")
 
+## Manual Opening
 
-Dependencies
+If the automatic browser does not open, the console will print something like:
+
+Listening on http://127.0.0.1:3604
+
+Simply copy this URL and paste it into your browser to run the app.
+
+
+## Dependencies
 
 ggplot2
 
