@@ -2,57 +2,73 @@
 % Please edit documentation in R/reg.poly.R
 \name{reg.poly}
 \alias{reg.poly}
-\title{Polinomial Regression}
+\title{Polynomial regression for quantitative treatments}
 \usage{
-reg.poly(
-  resp,
-  treat,
-  DFerror,
-  SSerror,
-  DFtreat,
-  SStreat,
-  main = "",
-  xlab = "",
-  ylab = "",
-  graph = TRUE,
-  best.fit = FALSE
-)
+reg.poly(resp, treat, DFerror, SSerror, DFtreat, SStreat, main = "", xlab = "",
+  ylab = "", graph = TRUE, best.fit = FALSE, alpha = 0.05)
 }
 \arguments{
-\item{resp}{Numeric or complex vector containing the
-response variable.}
+\item{resp}{Numeric vector with the response variable.}
 
-\item{treat}{Numeric or complex vector containing the
-treatments.}
+\item{treat}{Vector with the (numeric) levels of the quantitative factor.}
 
-\item{DFerror}{Error degrees of freedom.}
+\item{DFerror,SSerror}{Degrees of freedom and sum of squares of the error.}
 
-\item{SSerror}{Error sum of squares.}
+\item{DFtreat,SStreat}{Degrees of freedom and sum of squares of the
+  treatments (or of the factor inside a level of another factor).}
 
-\item{DFtreat}{Treatments' dregrees of freedom.}
+\item{main}{Subtitle of the graph.}
 
-\item{SStreat}{Treatments' sum of squares.}
+\item{xlab,ylab}{Axis labels.}
+
+\item{graph}{Logical. If \code{TRUE} (default), the graph is drawn.}
+
+\item{best.fit}{Logical. If \code{TRUE}, only the best model is drawn:
+  the model of highest degree whose highest-degree term is significant.
+  If \code{FALSE} (default), all fitted models are drawn.}
+
+\item{alpha}{Significance level used to choose the best model and to
+  mark significant coefficients with \code{*} (default 0.05).}
 }
 \value{
-Returns coefficients, significance and ANOVA of the
-fitted regression models.
+Invisibly, a list with the ANOVA of each model
+  (\code{Anova.Linear}, \code{Anova.Quad}, \code{Anova.Cub}), their
+  coefficients of determination (\code{R2.Linear}, \code{R2.Quad},
+  \code{R2.Cub}), their coefficients (\code{Coef.Linear}, ...) and the
+  name of the best model (\code{Best.model}).
 }
 \description{
-\code{reg.poly} Fits sequential regression models until the
-third power.
+Fits sequential polynomial regression models (linear, quadratic and cubic)
+for a quantitative factor, testing each effect against the error of the
+experiment, and optionally plots the observed means and the fitted curves.
+}
+\details{
+The linear model is fitted whenever there are at least 2 levels, the
+quadratic model with at least 3 levels and the cubic model with at least
+4 levels (the degree is limited by the treatment degrees of freedom).
+The coefficient of determination is computed as the regression sum of
+squares divided by the treatment sum of squares (\code{SStreat}).
+}
+\examples{
+dose <- rep(c(0, 50, 100, 150, 200), each = 4)
+set.seed(1)
+y <- 20 + 0.30 * dose - 0.001 * dose^2 + rnorm(20, sd = 2)
+fit <- aov(y ~ factor(dose))
+tab <- summary(fit)[[1]]
+reg.poly(y, dose, tab[2, 1], tab[2, 2], tab[1, 1], tab[1, 2],
+         best.fit = TRUE, xlab = "Dose", ylab = "Yield")
 }
 \references{
-GOMES, F. P. Curso de Estatistica Experimental.
-10a ed. Piracicaba: ESALQ/USP. 1982. 430.
+Banzatto, D. A.; Kronka, S. N. Experimentacao Agricola.
+  4. ed. Jaboticabal: Funep, 2006.
+
+  Gomes, F. P. Curso de Estatistica Experimental. 10. ed. Piracicaba:
+  ESALQ/USP, 1982.
 }
 \seealso{
-\code{\link{graphics}}.
+\code{\link{anova_crd}}
 }
 \author{
-Eric B Ferreira,
- \email{eric.ferreira@unifal-mg.edu.br}
-
-Denismar Alves Nogueira
-
-Portya Piscitelli Cavalcanti
+Cicero Carlos de Souza Almeida. Based on ExpDes (E. B. Ferreira,
+  D. A. Nogueira, P. P. Cavalcanti).
 }

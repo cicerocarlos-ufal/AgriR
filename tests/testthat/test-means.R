@@ -1,0 +1,10 @@
+test_that("means are correct", {
+  x <- c(1, 2, 4, NA)
+  expect_equal(ari_mean(x), 7 / 3)
+  expect_equal(geo_mean(x), 2)
+  expect_equal(har_mean(x), 3 / (1 + 1 / 2 + 1 / 4))
+  expect_equal(pon_mean(c(1, 3), c(1, 3)), 2.5)
+  expect_true(is.na(ari_mean(x, na.rm = FALSE)))
+  expect_error(geo_mean(c(1, -1)))
+  expect_error(pon_mean(1:3, 1:2))
+})

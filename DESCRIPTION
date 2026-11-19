@@ -1,16 +1,47 @@
 Package: AgriR
-Title: Experimental design statistics
-Version: 0.1
-Authors@R: 
-    person("Cícero", "Almeida", , "cicero@arapiraca.ufal.br", role = c("aut", "cre"))
-Description: Functions for Experimental design statistics.
-License: GPL-3
+Type: Package
+Title: Teaching and Analysis of Agricultural Experiments
+Version: 1.0.0
+Authors@R: c(
+    person("Cicero Carlos", "de Souza Almeida", role = c("aut", "cre"),
+           email = "cicero@arapiraca.ufal.br"),
+    person("Eric B.", "Ferreira", role = "ctb",
+           comment = "Code adapted from the ExpDes package"),
+    person("Denismar A.", "Nogueira", role = "ctb",
+           comment = "Code adapted from the ExpDes package"),
+    person("Portya P.", "Cavalcanti", role = "ctb",
+           comment = "Code adapted from the ExpDes package"),
+    person("Felipe", "de Mendiburu", role = "ctb",
+           comment = "Grouping algorithms adapted from the agricolae package"),
+    person("Laercio Junio", "da Silva", role = "ctb",
+           comment = "Original Scott-Knott implementation")
+    )
+Description: Tools for teaching and analysing agricultural experiments.
+    Randomizes and draws completely randomized, randomized block,
+    factorial (two and three factors), split-plot and split-split-plot
+    designs; performs analysis of variance for completely randomized,
+    randomized block and Latin square designs, double and triple factorial,
+    split-plot and split-split-plot schemes, with unfolding of significant
+    interactions; multiple comparison tests (Tukey, Duncan, LSD,
+    Student-Newman-Keuls, Scheffe and Scott and Knott (1974)
+    <doi:10.2307/2529204>); polynomial regression for quantitative factors;
+    descriptive statistics, frequency tables and histograms; and didactic
+    simulations of confidence intervals and mean tests, also available
+    through an interactive 'shiny' application.
+License: GPL (>= 2)
+URL: https://github.com/cicerocarlos-ufal/AgriR
+BugReports: https://github.com/cicerocarlos-ufal/AgriR/issues
 Encoding: UTF-8
-RoxygenNote: 7.3.2
-Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
 Depends:
-    R (>= 4.0),
-    ggplot2,
-    shiny
+    R (>= 4.0.0)
+Imports:
+    ggplot2 (>= 3.4.0),
+    graphics,
+    grDevices,
+    stats,
+    utils
+Suggests:
+    shiny,
+    testthat (>= 3.1.5)
+Config/testthat/edition: 3
+RoxygenNote: 7.3.2

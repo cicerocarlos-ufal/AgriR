@@ -1,914 +1,511 @@
+# Interactive application of the AgriR package.
+# Start it with AgriR::run_app()
+
 library(shiny)
-#-----------
-  ui = fluidPage(
-    
-    navbarPage("App Statistic",
-               
+library(AgriR)
 
-#------------------------INICIO SIMULATION---------------------           
-                     
-        navbarMenu("Simulation",
-                   #---------------------BEM VINDOS------------------
-                   tabPanel("About",
-                            sidebarLayout(
-                               sidebarPanel(
-                                  h4("Univerisdade Federal de Alagoas"),
-                                  h4("Campus Arapiraca"),
-                                  h4("Mestrado Agricultura e Ambiente")
-                               ),
-                               mainPanel(
-                               h2("Welcome"),plotOutput("map5")))),
-                   #---------------------BEM VINDOS------------------
-                   tabPanel("Histogram", 
-                            sidebarLayout(
-                              sidebarPanel(
-                                 sliderInput("mean3", label = h6("Mean"), 50,150,1,value=100),
-                                 sliderInput("sd3", label = h6("Standard Deviation"), 8,20,1,value=10),
-                                 sliderInput("n3", label = h6("Sample"), 20,200,1,value=100),
-                                 submitButton("Update View")
-                                 ),
-                              mainPanel(
-                                h2("Histogram"),plotOutput("map4")))),
-                   
-                   tabPanel("Confidance Interval", 
-                                   sidebarLayout(
-                                     sidebarPanel(
-                                       p("Provide the mean, Standard Deviation, Samples, Distribution type "),
-                                       fluidRow(
-                                         column(6,
-                                                sliderInput("mean1", label = h6("Mean A"), 50,150,1,value=100),
-                                                sliderInput("sd1", label = h6("Standard Deviation A"), 8,20,1, value=14),
-                                                sliderInput("n1", label = h6("Sample A"), 3,100,1)),
-                                                                                            
-                                         column(6,
-                                              sliderInput("mean2", label = h6("Mean B"), 50,150,1,value=100),
-                                              sliderInput("sd2", label = h6("Standard Deviation B"), 8,20,1, value=14),
-                                              sliderInput("n2", label = h6("Sample B"), 3,100,1))),
-                                              
-                                       radioButtons('dist', 'Distribution',c('Normal'="normal",'t-test'="t"), 'normal'),      
-                                       sliderInput('alpha', 'Alpha',0.01,0.05,0.05),
-                                       submitButton("Update View")  
-                                     ),
-                                     
-                                     mainPanel(
-                                       h3("Confidence interval for Mean A"),plotOutput("map"),
-                                       h3("Confidence interval for Mean B"),plotOutput("map1"))
-                                   ),
-                          ),
-                   #---------------------------INICIO TESTE MEDIAS----------------------------
-                   tabPanel("Mean test",
-                            sidebarLayout(
-                               sidebarPanel(
-                                  p("Simulation mean test"),
-                                  fluidRow(
-                                     column(6,
-                                            sliderInput("mean4", label = h6("Mean A"), 50,150,1,value=100),
-                                            sliderInput("sd4", label = h6("Standard Deviation A"), 8,20,1, value=14),
-                                            sliderInput("n4", label = h6("Sample A"), 3,100,1)),
-                                     
-                                     column(6,
-                                            sliderInput("mean5", label = h6("Mean B"), 50,150,1,value=100),
-                                            sliderInput("sd5", label = h6("Standard Deviation B"), 8,20,1, value=14),
-                                            sliderInput("n5", label = h6("Sample B"), 3,100,1))),
-                                  
-                                  sliderInput('alpha1', 'Alpha',0.01,0.05,0.05),
-                                  submitButton("Update View")
-                                  
-                               ),
-                               
-                               mainPanel(
-                                  h4("Mean Test"),plotOutput("map3"))
-                            ),
-                            
-                   )
-                   
-                   #---------------------------FIM TESTE MEDIAS----------------------------
-                   
-                   
-
-                   
-                   
-        ),
-                   
-#------------------------FIM SIMULATION-------------------------       
-
-#-----------------------INICIO EXPERIMENTAL DESING-------------        
-        tabPanel("Experimental Desing",
-                 
-                 sidebarLayout(
-                   sidebarPanel( 
-                     sliderInput(inputId = "trt1",
-                                 label = "Número de Níveis (Fator 1):",
-                                 min = 2,
-                                 max = 30,
-                                 value = 2),
-                     sliderInput(inputId = "trt2",
-                                 label = "Número de Níveis (Fator 2):",
-                                 min = 2,
-                                 max = 30,
-                                 value = 2),
-                     sliderInput(inputId = "rep",
-                                 label = "Número de Repetições:",
-                                 min = 3,
-                                 max = 10,
-                                 value = 3),
-                     #Parte2
-                     
-                     radioButtons("des_type", "Desing type",c("crd", "rbd")),
-                     radioButtons("factor", "Factor",c("one", "two")),
-                     radioButtons("splitplot", "SplitPlot",c("no", "yes")),
-                     submitButton("Update View")
-                   ),
-                
-                   
-                   mainPanel(
-                     h1("Experimental desing"),
-                     plotOutput(outputId = "desing"))
-                 )       
-                                   
-                   ),
-#----------------------------FIM EXPERIMENTAL DESING------------                  
-
-
-#----------------------------INCIO DESCRITIVA------------------
-
-navbarMenu("Basic Estatistics",
-           
-           tabPanel("Descriptive", 
-                    
-                    sidebarPanel(
-                      #dados        
-                      fileInput('file1', 'Choose CSV File',
-                                accept=c('text/csv', 'text/comma-separated- values,text/plain', '.csv')),
-                      checkboxInput('header1', 'Header', TRUE),
-                      fluidRow( column(6,
-                                       radioButtons('sep1', 'Separator',
-                                                    c(Comma=',',
-                                                      Semicolon=';',
-                                                      Tab='\t'),
-                                                    'Comma')),
-                                column(6,
-                                       radioButtons('dec1', 'Desimal seperator',  c('Comma'=",",
-                                                                                   'Dot'="."), 'Comma'))
-                      
-                                
-                                
-                                ),
-                      fluidRow(
-                        column(6,
-                              selectInput("var.desc", "Variable", choices=NULL)),
-                        column(6, 
-                               radioButtons("bygroups", "By Groups",c("no", "yes"))
-                               ),
-                        column(6,
-                              selectInput("var.group", "Groups", choices=NULL))
-                               ),
-                      submitButton("Update View")
-                      
-                      ),
-                      
-                  
-                    #Resultados    
-                    mainPanel(
-                      tabsetPanel(
-                        tabPanel("Show Data",         verbatimTextOutput("view1")),
-                        tabPanel("Statistics", verbatimTextOutput("descritive"), plotOutput("desc.plot"))        
-                            
-                                
-                      )
-                    )
-           ),
-           #-----------------------------INICIO DO HISTOGRAM--------------         
-           
-           tabPanel("Histogram", 
-                    
-                    sidebarPanel(
-                      #dados        
-                      fileInput('file2', 'Choose CSV File',
-                                accept=c('text/csv', 'text/comma-separated- values,text/plain', '.csv')),
-                      checkboxInput('header2', 'Header', TRUE),
-                      fluidRow( column(6,
-                                       radioButtons('sep2', 'Separator',
-                                                    c(Comma=',',
-                                                      Semicolon=';',
-                                                      Tab='\t'),
-                                                    'Comma')),
-                                column(6,
-                                       radioButtons('dec2', 'Desimal seperator',  c('Comma'=",",
-                                                                                   'Dot'="."), 'Comma'))
-                                
-                                
-                                
-                      ),
-                      fluidRow(
-                        column(6,
-                               selectInput("var.hist", "Variable", choices=NULL)),
-                        column(6,
-                               radioButtons("radio", "breaks type:",
-                                             choices=list("Empiric" = "empiric", "Sturges" = "sturges", "Rice Rule" = "ricerule","scott" = "scott", "Freedman-Diaconis"="fd"),
-                                             selected="empiric"))
-                      ),
-                      submitButton("Update View")
-                      
-                    ),
-                    
-                    
-                    #Resultados    
-                    mainPanel(
-                      tabsetPanel(
-                        tabPanel("Show Data",         verbatimTextOutput("view2")),
-                        tabPanel("Frequence Distribution", verbatimTextOutput("freq.dist")),
-                        tabPanel("Histogram", plotOutput("histogram"))        
-                    
-                      )
-                    )
-           ),
-         #----------------------------FIM DO HISTOGRAM
-           
-         
-         #--------------------------INICIO MEDIAS--------------
-         tabPanel("Means",
-                  
-                  sidebarPanel(
-                    #dados        
-                    fileInput('file3', 'Choose CSV File',
-                              accept=c('text/csv', 'text/comma-separated- values,text/plain', '.csv')),
-                    checkboxInput('header3', 'Header', TRUE),
-                    radioButtons('sep3', 'Separator', c(Comma=',', Semicolon=';', Tab='\t'),'Comma'),
-                    radioButtons('dec3', 'Desimal seperator',  c('Comma'=",",'Dot'="."), 'Comma'),
-                    selectInput("var.means", "Variable", choices=NULL),
-                    checkboxInput('weighted', 'Weighted', FALSE),
-                    selectInput("weig.means", "Weighted", choices=NULL),
-                    submitButton("Update View")
-                  ),
-                  mainPanel(
-                    tabsetPanel(
-                      tabPanel("Show Data",         verbatimTextOutput("view3")),
-                      tabPanel("Means", verbatimTextOutput("means"))))),
-         
-         #-------------------------FIM MEDIAS-----------------
-         
-
-         #-------------------------INCIO DO TESTE DE MEDIAS----------------------
-            tabPanel("Parwise Test Means",
-               
-               sidebarPanel(
-                  fileInput('file.m1', 'Choose CSV File1',
-                            accept=c('text/csv', 'text/comma-separated- values,text/plain', '.csv')),
-                  checkboxInput('header.m', 'Header', TRUE),
-                  radioButtons('sep.m', 'Separator',c(Comma=',',Semicolon=';',Tab='\t'),'Comma'),
-                  radioButtons('dec.m', 'Desimal seperator',  c('Comma'=",",'Dot'="."), 'Comma'),
-                  selectInput("var.m1", "Variable A", choices=NULL),
-                  selectInput("var.m2", "Variable B", choices=NULL),
-                  sliderInput('alpha.m1', 'Alpha',0.01,0.05,0.05),
-                  submitButton("Update View")
-               ),
-               
-               mainPanel(
-                  tabsetPanel(
-                     tabPanel("Show Data",    verbatimTextOutput("view.m1")),
-                     tabPanel(h4("Mean Test"),plotOutput("map.m1"), verbatimTextOutput("info.m1"))
-                  ))
-               
-            )
-
-
-         #--------------------------FIM TESTE DE MEDIAS
-
-),
-
-         
-#-----------------------------FIM DESCRITIVA-------------------
-
-
-#---------------------------INICIO ANOVA-------------------------------       
-    
-       
-        tabPanel("Anova",
-                 sidebarPanel( 
-                    
-                    #----------------------------------
-                    fileInput('file.a', 'Choose CSV File',
-                              accept=c('text/csv', 'text/comma-separated- values,text/plain', '.csv'))
-                    ,
-                    tags$hr(),
-                    checkboxInput('header.a', 'Header', TRUE),
-                    #-----------------------dados-------------------------------   
-                    fluidRow( column(6,
-                                     radioButtons('sep.a', 'Separator',
-                                                  c(Comma=',',
-                                                    Semicolon=';',
-                                                    Tab='\t'),
-                                                  'Comma')),
-                              column(6,
-                                     radioButtons('dec.a', 'Desimal seperator',
-                                                  c('Comma'=",",
-                                                    'Dot'="."), 'Comma'))
-                    ),
-                    #-----------------------delineamentos---------------------------        
-                    fluidRow( column(4,
-                                     radioButtons("des_type.a", "Desing type",c("crd", "rbd"))),
-                              column(4,
-                                     radioButtons("fator", "Factor",c("one", "two"))),
-                              column(4,
-                                     radioButtons("splitplot.a", "SplitPlot",c("no", "yes")))
-                    ),
-                    
-                    #-------------------area de teste
-                    
-                    
-                    #---------------------fim da area
-                    #-------------------Anova Data one factor-------------------
-                    #textInput("vectorname", "Enter Data frame: ", "My_anova"),
-                    fluidRow(column(6,
-                                    selectInput("treat1", "Factor 1", choices=NULL),
-                                    checkboxInput('quali_fac1', 'Qualitative Factor', TRUE)),
-                             column(6,
-                                    selectInput("treat2", "Factor2", choices=NULL),
-                                    checkboxInput('quali_fac2', 'Qualitative Factor', TRUE))
-                    ),
-                    
-                    fluidRow(column(6,
-                                    selectInput("resp", "Variable", choices=NULL)),
-                             column(6,       
-                                    selectInput("block", "Block", choices=NULL))
-                    ),
-                    #------------------Mcomp 
-                    fluidRow(column(6,
-                                    selectInput('mcomp', 'Mcomp', c('tukey','lsd','duncan','snk','scheffe','skottknott'))),
-                             column(6,
-                                    selectInput("graph_type", "Graph type",c("barplotb", "barplotg", "pointplotg","boxplotb")))
-                    ),
-                    submitButton("Update View")        
-                 ),
-                 
-                 
-                 mainPanel(
-                    #---------------------------------------- 
-                    tableOutput(outputId = 'table.output'),
-                    #-----------------------------------------
-                    h2(textOutput("caption")),
-                    
-                    tabsetPanel(
-                       tabPanel("Show Data",         verbatimTextOutput("view")),
-                       tabPanel("Structure",         verbatimTextOutput("structure")),
-                       tabPanel("Normality",         verbatimTextOutput("normality")),
-                       tabPanel("Box Plot",          plotOutput("gsPlot")),
-                       tabPanel("ANOVA Table",       verbatimTextOutput("anovatable")),
-                       tabPanel("Graph Output", plotOutput("tukeyplot", width = "1000px", height = "800px"), verbatimTextOutput("tukey"))
-                    )
-                    
-                 )
-        )        
-
-#------------------------FIM ANOVA---------------------------
-
-       )
+csv_inputs <- function(id) {
+  tagList(
+    fileInput(paste0("file", id), "Choose CSV File",
+              accept = c("text/csv", "text/comma-separated-values,text/plain",
+                         ".csv")),
+    checkboxInput(paste0("header", id), "Header", TRUE),
+    fluidRow(
+      column(6, radioButtons(paste0("sep", id), "Separator",
+                             c(Comma = ",", Semicolon = ";", Tab = "\t"),
+                             ";")),
+      column(6, radioButtons(paste0("dec", id), "Decimal separator",
+                             c(Comma = ",", Dot = "."), ","))
+    )
   )
-    
-  server = function(input, output,session) {
-     #---------------------BEM VINDOS------------------
-     output$map5 = renderPlot({
-        means.test (120,60,20,20,10,10, alpha=0.05)
-    
-     })
-
-#--------------------INICIO SIMULACAO-------------
-output$map = renderPlot({
-      
-      aproximate(input$mean1,input$sd1,input$n1,input$dist, input$alpha)
-})
-output$map1 <- renderPlot({
-      aproximate(input$mean2,input$sd2,input$n2,input$dist, input$alpha)	
-
-})
-
-output$map4 <- renderPlot({
-  sam=rnorm(input$n3,input$mean3,input$sd3)
-  
-  histg(sam)
-
-}) 
-
-#-----------------INICIO MEANS---------------
-output$map3 = renderPlot({
-   
-   means.test(input$mean4,input$mean5,input$sd4, input$sd5, input$n4, input$n5, input$alpha1)
-   
-})
-
-#----------------FIM MEANS
-
-#--------------------FIM SIMULACAO-------------
-
-#-------------------INICIO EXPERIMENTAL DESING---------------------
-    output$desing <- renderPlot({
-      if (input$des_type == "crd" && input$factor=="one"){des.crd(input$trt1,input$rep)}
-      if (input$des_type == "crd" && input$factor=="two"){des.fat2.crd(input$trt1,input$trt2,input$rep)}
-      if (input$des_type == "rbd" && input$factor=="one"){des.rbd(input$trt1,input$rep)}
-      if (input$des_type == "rbd" && input$factor=="two"){des.fat2.rbd(input$trt1,input$trt2,input$rep)}
-      if (input$des_type == "crd" && input$factor=="two" && input$splitplot=="yes"){des.sp.crd(input$trt1,input$trt2,input$rep)}
-      if (input$des_type == "rbd" && input$factor=="two" && input$splitplot=="yes"){des.sp.rbd(input$trt1,input$trt2,input$rep)}
-    })
-#------------------FIM EXPERIMENTAL DESING------------------------
-
-#------------------INICIO DESCRITIVA----------------------------    
-    desc.data <- reactive({
-      
-      inFile1 <- input$file1
-      if (is.null(inFile1))
-        return(NULL)
-      
-      dados1 <- read.csv(inFile1$datapath, header=input$header1, sep=input$sep1,  dec = input$dec1)
-      
-      return(dados1)
-    })
-    
-    output$view1 <- renderPrint({
-  
-      desc.data()	
-      })
-   
-     
-  
-    observe({
-      data1 <- input$file1
-      if (is.null(data1))return(NULL)
-      updateSelectInput(session,"var.desc", label="Select Variable", choices=colnames(desc.data()),selected="")
-      updateSelectInput(session,"var.group", label="Select Groups", choices=colnames(desc.data()),selected="")
-      })
-    
-    get_desc_var <- reactive({return(as.character(input$var.desc))})
-    get_groups <-  reactive({return(as.character(input$var.group))})
-    
-   output$descritive <- renderPrint({
-     datasheet.desc <- desc.data()
-      resp_desc <- get_desc_var()
-      variable=with(datasheet.desc,(get(resp_desc)))
-     
-     
-     if (input$bygroups == "no"){desc(variable)}
-     if (input$bygroups == "yes"){
-       groups <- get_groups()
-       groups1=with(datasheet.desc,(get(groups)))
-       desc(variable, groups1)}
-
-   })
-   
-   output$desc.plot <- renderPlot({
-     
-     datasheet.desc <- desc.data()
-          resp_desc <- get_desc_var()
-     variable=with(datasheet.desc,(get(resp_desc)))
-     
-     
-     if (input$bygroups == "no"){boxplot(variable)}
-     if (input$bygroups == "yes"){
-       groups <- get_groups()
-       groups1=with(datasheet.desc,(get(groups)))
-       boxplot(variable~groups1)}
-     
-   })
-    
-#-----------------FIM DESCRITIVA--------------------------------
- 
-#----------------INICIO HISTOGRAMA----------------------------
-   hist.data <- reactive({
-     
-     inFile2 <- input$file2
-     if (is.null(inFile2))
-       return(NULL)
-     
-     dados2 <- read.csv(inFile2$datapath, header=input$header2, sep=input$sep2,  dec = input$dec2)
-     
-     return(dados2)
-   })
-   
-   output$view2 <- renderPrint({
-     
-     hist.data()	
-   })
-   
-   
-   
-   observe({
-     data2 <- input$file2
-     if (is.null(data2))return(NULL)
-     updateSelectInput(session,"var.hist", label="Select Variable", choices=colnames(hist.data()),selected="")
-     
-   })
-   
-   get_hist_var <- reactive({return(as.character(input$var.hist))})
-
-   output$freq.dist <- renderPrint({
-     datasheet.hist <- hist.data()
-     resp_hist <- get_hist_var()
-     
-     variable=with(datasheet.hist,(get(resp_hist)))
-     
-     histg(variable,scores=(input$radio))
-     
-   })
-   
-   output$histogram <- renderPlot({
-     datasheet.hist <- hist.data()
-     resp_hist <- get_hist_var()
-     
-     variable=with(datasheet.hist,(get(resp_hist)))
-     
-     histg(variable,scores=(input$radio))
-     
-   })
-   
-#-----------------FIM HISTOGRAMA
-   
-   #---------------------INIO MEDIAS----------------------
-   means.data <- reactive({
-     
-     inFile3 <- input$file3
-     if (is.null(inFile3))
-       return(NULL)
-     
-     dados3 <- read.csv(inFile3$datapath, header=input$header3, sep=input$sep3,  dec = input$dec3)
-     
-     return(dados3)
-   })
-   
-   output$view3 <- renderPrint({
-     
-     means.data()	
-   })
-   
-   observe({
-     data3 <- input$file3
-     if (is.null(data3))return(NULL)
-     updateSelectInput(session,"var.means", label="Select Variable", choices=colnames(means.data()),selected="")
-     updateSelectInput(session,"weig.means", label="Select Weighted", choices=colnames(means.data()),selected="")
-   })
-   
-   get_means_var <- reactive({return(as.character(input$var.means))})
-   get_means_wei <- reactive({return(as.character(input$weig.means))})
-   
-   output$means <- renderPrint({
-     datasheet.means <- means.data()
-     resp_means <- get_means_var()
-     
-     vari1=with(datasheet.means,(get(resp_means)))
-     cat("--------------------------\n")
-     cat("Aritimetric mean\n")
-     print(ari_mean(vari1))
-     cat("--------------------------\n")
-     
-     cat("--------------------------\n")
-     cat("Geometric mean\n")
-     print(geo_mean(vari1))
-     cat("--------------------------\n")
-     
-     cat("--------------------------\n")
-     cat("Harmonic mean\n")
-     print(har_mean(vari1))
-     cat("--------------------------\n")
-     
-     if (input$weighted==TRUE){
-       weig_means <- get_means_wei()
-       weigt = with(datasheet.means,(get(weig_means)))
-       
-       cat("--------------------------\n")
-       cat("Weighted mean\n")
-       print(pon_mean(vari1,weigt ))
-       cat("--------------------------\n")}
-     
-   })  
- 
-#------------------FIM MEDIAS--------------------
-   
-   #---------------------INICIO TEST DE MEDIAS--------------------
-   m1.data <- reactive({
-      inFile.m1 <- input$file.m1
-      if (is.null(inFile.m1))
-         return(NULL)
-      
-      dados.m1 <- read.csv(inFile.m1$datapath, header=input$header.m, sep=input$sep.m,  dec = input$dec.m)
-      
-      return(dados.m1)
-   })
-   
-   output$view.m1 <- renderPrint({
-      
-      m1.data()	
-   })
-   
-   observe({
-      m1.data <- input$file.m1
-      if (is.null(m1.data))return(NULL)
-      updateSelectInput(session,"var.m1", label="Select Variable A", choices=colnames(m1.data()),selected="")
-      updateSelectInput(session,"var.m2", label="Select Variable B", choices=colnames(m1.data()),selected="")
-   })
-   get_var.m1 <- reactive({return(as.character(input$var.m1))})
-   get_var.m2 <- reactive({return(as.character(input$var.m2))})
-   
-   output$map.m1 = renderPlot({
-      datasheet.m1 <- m1.data()
-      resp_var.m1 <- get_var.m1()
-      resp_var.m2 <- get_var.m2()
-      
-      variable1=with(datasheet.m1,(get(resp_var.m1)))
-      variable2=with(datasheet.m1,(get(resp_var.m2)))
-      
-      par.test(variable1,variable2,input$alpha.m1)
-      
-   })
-   output$info.m1 <- renderPrint({
-      datasheet.m1 <- m1.data()
-      resp_var.m1 <- get_var.m1()
-      resp_var.m2 <- get_var.m2()
-      
-      variable1=with(datasheet.m1,(get(resp_var.m1)))
-      variable2=with(datasheet.m1,(get(resp_var.m2)))
-      
-      cat("--------------------------\n")
-      cat("Aritimetric mean A\n")
-      print(mean(variable1))
-      cat("--------------------------\n")
-      
-      cat("--------------------------\n")
-      cat("Aritimetric mean B\n")
-      print(mean(variable2))
-      cat("--------------------------\n")
-   })
-   #---------------------FIM TESTE DE MEDIAS-------------------- 
-#------------------------INICIO ANOVA
-   
-   mydata.a <- reactive({
-      
-      inFile.a <- input$file.a
-      if (is.null(inFile.a))
-         return(NULL)
-      
-      dados.a <- read.csv(inFile.a$datapath, header=input$header.a, sep=input$sep.a,  dec = input$dec.a)
-      
-      return(dados.a)
-   })
-   #-------------------------------------------------------------------------------------
-   
-   #Update para seleção de fatores e variáveis
-   
-   observe({
-      data.a <- input$file.a
-      if (is.null(data.a))return(NULL)
-      updateSelectInput(session,"treat1", label="Select Factor 1", choices=colnames(mydata.a()), selected="")
-      updateSelectInput(session,"treat2", label="Select Factor 2", choices=colnames(mydata.a()),selected="")
-      updateSelectInput(session,"resp", label="Select Variable", choices=colnames(mydata.a()),selected="")
-      updateSelectInput(session,"block", label="Select Blocks", choices=colnames(mydata.a()),selected="")
-   })
-   
-   
-   #Obter variável
-   get_resp_var <- reactive({return(as.character(input$resp))})
-   
-   #Obter bloco
-   get_block <- reactive({return(as.character(input$block))})
-   
-   #One factor
-   get_factors <- reactive({
-      if (input$des_type.a == "crd" && input$fator=="one"){return(as.character(input$treat1))}
-      if (input$des_type.a == "rbd" && input$fator=="one"){return(as.character(input$treat1))}
-   })
-   
-   #Two factors
-   get_factor1 <- reactive({
-      if (input$des_type.a == "crd" && input$fator=="two"){return(as.character(input$treat1))}
-      if (input$des_type.a == "rbd" && input$fator=="two"){return(as.character(input$treat1))}
-   })
-   get_factor2 <- reactive({
-      if (input$des_type.a == "crd" && input$fator=="two"){return(as.character(input$treat2))}
-      if (input$des_type.a == "rbd" && input$fator=="two"){return(as.character(input$treat2))}
-   })
-   
-   
-   #Visualizar dados
-   
-   output$view <- renderPrint({
-      
-      mydata.a()				
-      
-   })
-   #######################################################
-   # Display the structure of the selected data frame    #
-   #######################################################
-   output$structure <- renderPrint({
-      
-      # dataset=whichdataset()		
-      dataset.a=mydata.a()			#Cícero
-      
-      str(dataset.a)
-   }) 
-   
-   #######################################################
-   # Display the normality of the selected data frame    #
-   #######################################################
-   output$normality <- renderPrint({
-      dataset.a <- mydata.a()	
-      #Para one factor
-      resp_var <- get_resp_var()
-      factors <- get_factors()
-      factor1 <- get_factor1()
-      factor2 <- get_factor2()
-      if (input$des_type.a == "crd" && input$fator=="one"){print(with(dataset.a,tapply(get(resp_var), get(factors), shapiro.test)))}
-      if (input$des_type.a == "rbd" && input$fator=="one"){print(with(dataset.a,tapply(get(resp_var), get(factors), shapiro.test)))}
-      if (input$des_type.a == "crd" && input$fator=="two"){
-         
-         trt1=(with(dataset.a,tapply(get(resp_var), get(factor1), shapiro.test)))
-         trt2=(with(dataset.a,tapply(get(resp_var), get(factor2), shapiro.test)))
-         print(input$treat1)
-         print(trt1)
-         print(input$treat2)
-         print(trt2)
-      }
-      if (input$des_type.a == "rbd" && input$fator=="two"){
-         
-         trt1=(with(dataset.a,tapply(get(resp_var), get(factor1), shapiro.test)))
-         trt2=(with(dataset.a,tapply(get(resp_var), get(factor2), shapiro.test)))
-         print(input$treat1)
-         print(trt1)
-         print(input$treat2)
-         print(trt2)
-      }
-   })  
-   
-   
-   
- #######################################################
-# Display the ANOVA Table                             #
-#######################################################
-
-output$anovatable <- renderPrint({
-
-  # Obter dados e variáveis do input
-  dataset.a <- mydata.a()
-  resp_var <- get_resp_var()
-  factor1 <- get_factor1()
-  factor2 <- get_factor2()
-  block_var <- get_block()
-  
-  # Vetor da variável resposta
-  vari <- dataset.a[[resp_var]]
-  
-  # Vetor de bloco, se houver
-  repet <- if (!is.null(block_var)) dataset.a[[block_var]] else NULL
-  
-  # Vetor dos fatores
-  if (input$fator == "one") {
-    trt <- dataset.a[[get_factors()]]
-  }
-  
-  if (input$fator == "two") {
-    d.trt1 <- dataset.a[[factor1]]
-    d.trt2 <- dataset.a[[factor2]]
-  }
-  
-  # ANOVA para um fator
-  if (input$fator == "one") {
-    if (input$des_type.a == "crd") {
-      aov.res <- anova.crd(trt, vari,
-                            quali = input$quali_fac1,
-                            graph.type = input$graph_type,
-                            mcomp = input$mcomp,
-                            graph = FALSE)
-    } else if (input$des_type.a == "rbd") {
-      aov.res <- anova.rbd(trt, vari, repet,
-                            quali = input$quali_fac1,
-                            graph.type = input$graph_type,
-                            mcomp = input$mcomp,
-                            graph = FALSE)
-    }
-  }
-  
-  # ANOVA para dois fatores
-  if (input$fator == "two") {
-    quali_factors <- c(input$quali_fac1, input$quali_fac2)
-    
-    if (input$splitplot.a == "no") {
-      if (input$des_type.a == "crd") {
-        aov.res <- anova.fat2.crd(d.trt1, d.trt2, vari,
-                                   quali = quali_factors,
-                                   graph = FALSE)
-      } else if (input$des_type.a == "rbd") {
-        aov.res <- anova.fat2.rbd(d.trt1, d.trt2, repet, vari,
-                                   quali = quali_factors,
-                                   graph = FALSE)
-      }
-    }
-    
-    if (input$splitplot.a == "yes") {
-      if (input$des_type.a == "crd") {
-        aov.res <- anova.sp2.crd(d.trt1, d.trt2, repet, vari,
-                                  quali = quali_factors,
-                                  graph = FALSE)
-      } else if (input$des_type.a == "rbd") {
-        aov.res <- anova.sp2.rbd(d.trt1, d.trt2, repet, vari,
-                                  quali = quali_factors,
-                                  graph = FALSE)
-      }
-    }
-  }
-  
-  # Exibir resultado da ANOVA
-  print(aov.res)
-  
-  br(); br()
-})
-
-   
-   
-   
-   ################################################
-   # Generate a boxplot of the requested variable #
-   # include outliers                             #
-   ################################################
-   output$gsPlot <- renderPlot({
-      
-      #dataset=whichdataset()
-      dataset.a=mydata.a()						#Cícero
-      if (input$fator=="one"){
-         resp_var <- get_resp_var()
-         factors <- get_factors()
-         #block_f <- get_block()
-         
-         #repet= with(dataset,(get(block_f)))
-         trt=with(dataset.a,(get(factors)))
-         vari=with(dataset.a,(get(resp_var)))
-         # mt=paste(input$treat1, " : " ,input$resp)
-         boxplot(vari~trt, col="skyblue", ylab=as.character(resp_var), xlab=as.character(factors))
-      }
-      if (input$fator=="two"){
-         par(mfrow=c(1,2))
-         factor1 <- get_factor1()
-         factor2 <- get_factor2()
-         d.trt1=with(dataset.a, get(factor1))
-         d.trt2=with(dataset.a, get(factor2))
-         resp_var <- get_resp_var()
-         vari=with(dataset.a,(get(resp_var)))
-         
-         boxplot(vari~d.trt1, col="skyblue", ylab=as.character(resp_var), xlab=as.character(factor1))
-         boxplot(vari~d.trt2, col="skyblue", ylab=as.character(resp_var), xlab=as.character(factor2))
-      }
-   }) 
-   
-   
-   #######################################################
-   # plot Tukey Groups                                   #
-   #######################################################
-   output$tukeyplot <- renderPlot({
-      
-      # dataset=whichdataset()	
-      dataset.a=mydata.a()						#Cícero
-      resp_var <- get_resp_var()
-      factors <- get_factors()
-      factor1 <- get_factor1()
-      factor2 <- get_factor2()
-      block_f = get_block()
-      repet= with(dataset.a,(get(block_f)))
-      
-      if (input$fator=="one"){trt=with(dataset.a,(get(factors)))}
-      
-      
-      #Criar vetore para os fatores 
-      if (input$fator=="two"){
-         d.trt1=with(dataset.a, get(factor1))
-         
-         d.trt2=with(dataset.a, get(factor2))
-      }
-      #Vetor variavel
-      vari=with(dataset.a,(get(resp_var)))
-      
-      #Fazer anova para one fator
-      
-      if (input$des_type.a == "crd" && input$fator=="one"){aov.res = anova.crd(trt,vari,quali = input$quali_fac1, graph.type=input$graph_type, mcomp=input$mcomp)}
-      if (input$des_type.a == "rbd" && input$fator=="one"){aov.res = anova.rbd(trt,vari,repet,quali = input$quali_fac1, graph.type=input$graph_type, mcomp=input$mcomp)}
-      
-      #Anova para fatorial
-      fac.name=c(as.character(input$treat1),as.character(input$treat2))
-      if (input$splitplot.a=="no" && input$des_type.a == "crd" && input$fator=="two"){aov.res = anova.fat2.crd(d.trt1,d.trt2,vari, quali = c(input$quali_fac1,input$quali_fac2), graph.type=input$graph_type, mcomp=input$mcomp, fac.names=fac.name)}
-      if (input$splitplot.a=="no" && input$des_type.a == "rbd" && input$fator=="two"){aov.res = anova.fat2.rbd(d.trt1,d.trt2,repet,vari, quali = c(input$quali_fac1,input$quali_fac2), graph.type=input$graph_type, mcomp=input$mcomp,fac.names=fac.name)}
-      
-      if (input$splitplot.a=="yes" && input$des_type.a == "crd" && input$fator=="two"){aov.res = anova.sp2.crd(d.trt1,d.trt2,repet,vari, quali = c(input$quali_fac1,input$quali_fac2), graph.type=input$graph_type, mcomp=input$mcomp, fac.names=fac.name)}
-      if (input$splitplot.a=="yes" && input$des_type.a == "rbd" && input$fator=="two"){aov.res = anova.sp2.rbd(d.trt1,d.trt2,repet,vari, quali = c(input$quali_fac1,input$quali_fac2), graph.type=input$graph_type, mcomp=input$mcomp,fac.names=fac.name)}
-      
-      
-      #print(aov.res$Mcomp)
-      
-   })  
-   
-   
-   
-#---------------------FIM ANOVA-------------------
-   
-   
-   
 }
 
+read_csv_input <- function(input, id) {
+  f <- input[[paste0("file", id)]]
+  if (is.null(f)) return(NULL)
+  sep <- input[[paste0("sep", id)]]
+  dec <- input[[paste0("dec", id)]]
+  validate(need(sep != dec,
+                "The column separator and the decimal separator must be different."))
+  utils::read.csv(f$datapath, header = input[[paste0("header", id)]],
+                  sep = sep, dec = dec)
+}
 
- # shinyApp(ui = ui, server = server)
-  shinyApp(ui, server)
-# 
+column_of <- function(data, name) {
+  req(data, name, nzchar(name), name %in% names(data))
+  data[[name]]
+}
+
+ui <- fluidPage(
+  navbarPage("AgriR",
+    #------------------------------ SIMULATION ------------------------------
+    navbarMenu("Simulation",
+      tabPanel("About",
+        sidebarLayout(
+          sidebarPanel(
+            h4("Universidade Federal de Alagoas"),
+            h4("Campus Arapiraca"),
+            h4("Mestrado Agricultura e Ambiente")
+          ),
+          mainPanel(h2("Welcome"), plotOutput("map5"))
+        )
+      ),
+      tabPanel("Histogram",
+        sidebarLayout(
+          sidebarPanel(
+            sliderInput("mean3", h6("Mean"), 50, 150, value = 100, step = 1),
+            sliderInput("sd3", h6("Standard Deviation"), 8, 20, value = 10,
+                        step = 1),
+            sliderInput("n3", h6("Sample"), 20, 200, value = 100, step = 1),
+            submitButton("Update View")
+          ),
+          mainPanel(h2("Histogram"), plotOutput("map4"))
+        )
+      ),
+      tabPanel("Confidence Interval",
+        sidebarLayout(
+          sidebarPanel(
+            p("Provide the mean, standard deviation, sample size and distribution"),
+            fluidRow(
+              column(6,
+                sliderInput("mean1", h6("Mean A"), 50, 150, value = 100, step = 1),
+                sliderInput("sd1", h6("Standard Deviation A"), 8, 20, value = 14,
+                            step = 1),
+                sliderInput("n1", h6("Sample A"), 3, 100, value = 10, step = 1)),
+              column(6,
+                sliderInput("mean2", h6("Mean B"), 50, 150, value = 100, step = 1),
+                sliderInput("sd2", h6("Standard Deviation B"), 8, 20, value = 14,
+                            step = 1),
+                sliderInput("n2", h6("Sample B"), 3, 100, value = 30, step = 1))
+            ),
+            radioButtons("dist", "Distribution", c(Normal = "normal", t = "t"),
+                         "normal"),
+            sliderInput("alpha", "Alpha", 0.01, 0.10, 0.05),
+            submitButton("Update View")
+          ),
+          mainPanel(
+            h3("Confidence interval for Mean A"), plotOutput("map"),
+            h3("Confidence interval for Mean B"), plotOutput("map1")
+          )
+        )
+      ),
+      tabPanel("Mean test",
+        sidebarLayout(
+          sidebarPanel(
+            p("Simulation of the comparison of two means"),
+            fluidRow(
+              column(6,
+                sliderInput("mean4", h6("Mean A"), 50, 150, value = 100, step = 1),
+                sliderInput("sd4", h6("Standard Deviation A"), 8, 20, value = 14,
+                            step = 1),
+                sliderInput("n4", h6("Sample A"), 3, 100, value = 10, step = 1)),
+              column(6,
+                sliderInput("mean5", h6("Mean B"), 50, 150, value = 110, step = 1),
+                sliderInput("sd5", h6("Standard Deviation B"), 8, 20, value = 14,
+                            step = 1),
+                sliderInput("n5", h6("Sample B"), 3, 100, value = 10, step = 1))
+            ),
+            sliderInput("alpha1", "Alpha", 0.01, 0.10, 0.05),
+            submitButton("Update View")
+          ),
+          mainPanel(h4("Mean Test"), plotOutput("map3"))
+        )
+      )
+    ),
+    #------------------------- EXPERIMENTAL DESIGN --------------------------
+    tabPanel("Experimental Design",
+      sidebarLayout(
+        sidebarPanel(
+          sliderInput("trt1", "Number of levels (factor 1):", 2, 30, 4),
+          sliderInput("trt2", "Number of levels (factor 2):", 2, 30, 2),
+          sliderInput("trt3", "Number of levels (factor 3):", 2, 10, 2),
+          sliderInput("rep", "Number of replications / blocks:", 2, 10, 3),
+          radioButtons("des_type", "Design type",
+                       c("Completely randomized (CRD)" = "crd",
+                         "Randomized blocks (RBD)" = "rbd")),
+          radioButtons("factor", "Factors",
+                       c(One = "one", Two = "two", Three = "three")),
+          radioButtons("splitplot", "Split-plot (two factors) / split-split-plot (three factors)",
+                       c(No = "no", Yes = "yes")),
+          submitButton("Update View")
+        ),
+        mainPanel(
+          h1("Experimental design"),
+          plotOutput("desing", height = "600px"),
+          h3("Field book"),
+          tableOutput("book")
+        )
+      )
+    ),
+    #------------------------- BASIC STATISTICS -----------------------------
+    navbarMenu("Basic Statistics",
+      tabPanel("Descriptive",
+        sidebarPanel(
+          csv_inputs("1"),
+          fluidRow(
+            column(6, selectInput("var.desc", "Variable", choices = NULL)),
+            column(6, radioButtons("bygroups", "By Groups", c("no", "yes"))),
+            column(6, selectInput("var.group", "Groups", choices = NULL))
+          ),
+          submitButton("Update View")
+        ),
+        mainPanel(
+          tabsetPanel(
+            tabPanel("Show Data", verbatimTextOutput("view1")),
+            tabPanel("Statistics", verbatimTextOutput("descritive"),
+                     plotOutput("desc.plot"))
+          )
+        )
+      ),
+      tabPanel("Histogram",
+        sidebarPanel(
+          csv_inputs("2"),
+          fluidRow(
+            column(6, selectInput("var.hist", "Variable", choices = NULL)),
+            column(6, radioButtons("radio", "Breaks type:",
+                                   choices = list("Empiric" = "empiric",
+                                                  "Sturges" = "sturges",
+                                                  "Rice Rule" = "ricerule",
+                                                  "Scott" = "scott",
+                                                  "Freedman-Diaconis" = "fd"),
+                                   selected = "empiric"))
+          ),
+          submitButton("Update View")
+        ),
+        mainPanel(
+          tabsetPanel(
+            tabPanel("Show Data", verbatimTextOutput("view2")),
+            tabPanel("Frequency Distribution", verbatimTextOutput("freq.dist")),
+            tabPanel("Histogram", plotOutput("histogram"))
+          )
+        )
+      ),
+      tabPanel("Means",
+        sidebarPanel(
+          csv_inputs("3"),
+          selectInput("var.means", "Variable", choices = NULL),
+          checkboxInput("weighted", "Weighted", FALSE),
+          selectInput("weig.means", "Weights", choices = NULL),
+          submitButton("Update View")
+        ),
+        mainPanel(
+          tabsetPanel(
+            tabPanel("Show Data", verbatimTextOutput("view3")),
+            tabPanel("Means", verbatimTextOutput("means"))
+          )
+        )
+      ),
+      tabPanel("Pairwise Test Means",
+        sidebarPanel(
+          csv_inputs(".m"),
+          selectInput("var.m1", "Variable A", choices = NULL),
+          selectInput("var.m2", "Variable B", choices = NULL),
+          sliderInput("alpha.m1", "Alpha", 0.01, 0.10, 0.05),
+          submitButton("Update View")
+        ),
+        mainPanel(
+          tabsetPanel(
+            tabPanel("Show Data", verbatimTextOutput("view.m1")),
+            tabPanel("Mean Test", plotOutput("map.m1"),
+                     verbatimTextOutput("info.m1"))
+          )
+        )
+      )
+    ),
+    #------------------------------- ANOVA ----------------------------------
+    tabPanel("Anova",
+      sidebarPanel(
+        csv_inputs(".a"),
+        tags$hr(),
+        fluidRow(
+          column(4, radioButtons("des_type.a", "Design type",
+                                 c(CRD = "crd", RBD = "rbd"))),
+          column(4, radioButtons("fator", "Factors",
+                                 c(One = "one", Two = "two", Three = "three"))),
+          column(4, radioButtons("splitplot.a", "Split-plot",
+                                 c(No = "no", Yes = "yes")))
+        ),
+        fluidRow(
+          column(6, selectInput("treat1", "Factor 1", choices = NULL),
+                 checkboxInput("quali_fac1", "Qualitative Factor", TRUE)),
+          column(6, selectInput("treat2", "Factor 2", choices = NULL),
+                 checkboxInput("quali_fac2", "Qualitative Factor", TRUE))
+        ),
+        fluidRow(
+          column(6, selectInput("treat3", "Factor 3", choices = NULL),
+                 checkboxInput("quali_fac3", "Qualitative Factor", TRUE))
+        ),
+        fluidRow(
+          column(6, selectInput("resp", "Variable", choices = NULL)),
+          column(6, selectInput("block", "Block / Repetition", choices = NULL))
+        ),
+        fluidRow(
+          column(6, selectInput("mcomp", "Mcomp",
+                                c("tukey", "lsd", "duncan", "snk", "scheffe",
+                                  "scottknott"))),
+          column(6, selectInput("graph_type", "Graph type",
+                                c("barplotb", "barplotg", "pointplotg",
+                                  "boxplotb")))
+        ),
+        radioButtons("fac.fix", "Unfolding of a significant interaction",
+                     c("Factor 1 inside factor 2" = "fac.A",
+                       "Factor 2 inside factor 1" = "fac.B")),
+        submitButton("Update View")
+      ),
+      mainPanel(
+        tabsetPanel(
+          tabPanel("Show Data", verbatimTextOutput("view")),
+          tabPanel("Structure", verbatimTextOutput("structure")),
+          tabPanel("Normality", verbatimTextOutput("normality")),
+          tabPanel("Box Plot", plotOutput("gsPlot")),
+          tabPanel("ANOVA Table", verbatimTextOutput("anovatable")),
+          tabPanel("Graph Output",
+                   plotOutput("tukeyplot", width = "1000px", height = "800px"))
+        )
+      )
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  #------------------------------ SIMULATION ------------------------------
+  output$map5 <- renderPlot({
+    means.test(120, 60, 20, 20, 10, 10, alpha = 0.05)
+  })
+  output$map <- renderPlot({
+    aproximate(input$mean1, input$sd1, input$n1, input$dist, input$alpha)
+  })
+  output$map1 <- renderPlot({
+    aproximate(input$mean2, input$sd2, input$n2, input$dist, input$alpha)
+  })
+  output$map4 <- renderPlot({
+    histg(rnorm(input$n3, input$mean3, input$sd3))
+  })
+  output$map3 <- renderPlot({
+    means.test(input$mean4, input$mean5, input$sd4, input$sd5, input$n4,
+               input$n5, input$alpha1)
+  })
+
+  #------------------------- EXPERIMENTAL DESIGN --------------------------
+  design <- reactive({
+    nf <- switch(input$factor, one = 1, two = 2, three = 3)
+    split <- nf > 1 && input$splitplot == "yes"
+    crd <- input$des_type == "crd"
+    list(nf = nf, two = nf == 2, split = split, crd = crd)
+  })
+  output$desing <- renderPlot({
+    d <- design()
+    res <- if (d$nf == 3) {
+      if (d$split) {
+        if (d$crd) des.ssp.crd(input$trt1, input$trt2, input$trt3, input$rep) else
+          des.ssp.rbd(input$trt1, input$trt2, input$trt3, input$rep)
+      } else {
+        if (d$crd) des.fat3.crd(input$trt1, input$trt2, input$trt3, input$rep) else
+          des.fat3.rbd(input$trt1, input$trt2, input$trt3, input$rep)
+      }
+    } else if (!d$two) {
+      if (d$crd) des.crd(input$trt1, input$rep) else des.rbd(input$trt1, input$rep)
+    } else if (d$split) {
+      if (d$crd) des.sp.crd(input$trt1, input$trt2, input$rep) else
+        des.sp.rbd(input$trt1, input$trt2, input$rep)
+    } else {
+      if (d$crd) des.fat2.crd(input$trt1, input$trt2, input$rep) else
+        des.fat2.rbd(input$trt1, input$trt2, input$rep)
+    }
+    book(res$Book)
+  })
+  book <- reactiveVal(NULL)
+  output$book <- renderTable(book())
+
+  #--------------------------- DESCRIPTIVE --------------------------------
+  desc.data <- reactive(read_csv_input(input, "1"))
+  output$view1 <- renderPrint(desc.data())
+  observe({
+    d <- desc.data()
+    req(d)
+    updateSelectInput(session, "var.desc", choices = colnames(d))
+    updateSelectInput(session, "var.group", choices = colnames(d))
+  })
+  output$descritive <- renderPrint({
+    d <- desc.data()
+    variable <- column_of(d, input$var.desc)
+    if (input$bygroups == "no") desc(variable) else
+      desc(variable, column_of(d, input$var.group))
+  })
+  output$desc.plot <- renderPlot({
+    d <- desc.data()
+    variable <- column_of(d, input$var.desc)
+    if (input$bygroups == "no") {
+      boxplot(variable, col = "skyblue")
+    } else {
+      groups <- column_of(d, input$var.group)
+      boxplot(variable ~ groups, col = "skyblue")
+    }
+  })
+
+  #----------------------------- HISTOGRAM --------------------------------
+  hist.data <- reactive(read_csv_input(input, "2"))
+  output$view2 <- renderPrint(hist.data())
+  observe({
+    d <- hist.data()
+    req(d)
+    updateSelectInput(session, "var.hist", choices = colnames(d))
+  })
+  output$freq.dist <- renderPrint({
+    variable <- column_of(hist.data(), input$var.hist)
+    histg(variable, scores = input$radio)
+  })
+  output$histogram <- renderPlot({
+    variable <- column_of(hist.data(), input$var.hist)
+    histg(variable, scores = input$radio)
+  })
+
+  #------------------------------- MEANS ----------------------------------
+  means.data <- reactive(read_csv_input(input, "3"))
+  output$view3 <- renderPrint(means.data())
+  observe({
+    d <- means.data()
+    req(d)
+    updateSelectInput(session, "var.means", choices = colnames(d))
+    updateSelectInput(session, "weig.means", choices = colnames(d))
+  })
+  output$means <- renderPrint({
+    d <- means.data()
+    x <- column_of(d, input$var.means)
+    cat("Arithmetic mean:", ari_mean(x), "\n")
+    cat("Geometric mean: ", tryCatch(geo_mean(x), error = conditionMessage), "\n")
+    cat("Harmonic mean:  ", tryCatch(har_mean(x), error = conditionMessage), "\n")
+    if (isTRUE(input$weighted)) {
+      cat("Weighted mean:  ", pon_mean(x, column_of(d, input$weig.means)), "\n")
+    }
+  })
+
+  #------------------------- PAIRWISE MEANS TEST --------------------------
+  m1.data <- reactive(read_csv_input(input, ".m"))
+  output$view.m1 <- renderPrint(m1.data())
+  observe({
+    d <- m1.data()
+    req(d)
+    updateSelectInput(session, "var.m1", choices = colnames(d))
+    updateSelectInput(session, "var.m2", choices = colnames(d))
+  })
+  output$map.m1 <- renderPlot({
+    d <- m1.data()
+    par.test(column_of(d, input$var.m1), column_of(d, input$var.m2),
+             input$alpha.m1)
+  })
+  output$info.m1 <- renderPrint({
+    d <- m1.data()
+    a <- column_of(d, input$var.m1)
+    b <- column_of(d, input$var.m2)
+    cat("Mean A:", mean(a, na.rm = TRUE), "\n")
+    cat("Mean B:", mean(b, na.rm = TRUE), "\n\n")
+    print(stats::t.test(a, b, var.equal = TRUE,
+                        conf.level = 1 - input$alpha.m1))
+  })
+
+  #------------------------------- ANOVA ----------------------------------
+  mydata.a <- reactive(read_csv_input(input, ".a"))
+  observe({
+    d <- mydata.a()
+    req(d)
+    for (id in c("treat1", "treat2", "treat3", "resp", "block")) {
+      updateSelectInput(session, id, choices = colnames(d))
+    }
+  })
+  output$view <- renderPrint(mydata.a())
+  output$structure <- renderPrint(str(mydata.a()))
+
+  # Runs the analysis selected in the interface.
+  run_anova <- function(graph) {
+    d <- mydata.a()
+    req(d)
+    vari <- column_of(d, input$resp)
+    trt1 <- column_of(d, input$treat1)
+    needs_block <- input$des_type.a == "rbd" ||
+      (input$fator != "one" && input$splitplot.a == "yes")
+    repet <- if (needs_block) column_of(d, input$block) else NULL
+    common <- list(graph = graph, graph.type = input$graph_type,
+                   mcomp = input$mcomp)
+    if (input$fator == "one") {
+      args <- c(list(trt1, vari), if (!is.null(repet)) list(repet),
+                list(quali = input$quali_fac1), common)
+      fun <- if (input$des_type.a == "crd") anova_crd else anova_rbd
+      return(do.call(fun, args))
+    }
+    trt2 <- column_of(d, input$treat2)
+    if (input$fator == "three") {
+      trt3 <- column_of(d, input$treat3)
+      extra3 <- c(list(quali = c(input$quali_fac1, input$quali_fac2,
+                                 input$quali_fac3),
+                       fac.names = c(input$treat1, input$treat2, input$treat3)),
+                  common)
+      fun <- if (input$splitplot.a == "yes") {
+        if (input$des_type.a == "crd") anova_ssp_crd else anova_ssp_rbd
+      } else {
+        if (input$des_type.a == "crd") anova_fat3_crd else anova_fat3_rbd
+      }
+      args <- c(list(trt1, trt2, trt3),
+                if (!is.null(repet)) list(repet), list(vari), extra3)
+      return(do.call(fun, args))
+    }
+    quali <- c(input$quali_fac1, input$quali_fac2)
+    fac.names <- c(input$treat1, input$treat2)
+    extra <- c(list(quali = quali, fac.names = fac.names,
+                    fac.fix = input$fac.fix), common)
+    if (input$splitplot.a == "no") {
+      if (input$des_type.a == "crd") {
+        do.call(anova_fat2_crd, c(list(trt1, trt2, vari), extra))
+      } else {
+        do.call(anova_fat2_rbd, c(list(trt1, trt2, repet, vari), extra))
+      }
+    } else {
+      fun <- if (input$des_type.a == "crd") anova_sp2_crd else anova_sp2_rbd
+      do.call(fun, c(list(trt1, trt2, repet, vari), extra))
+    }
+  }
+
+  output$normality <- renderPrint({
+    d <- mydata.a()
+    vari <- column_of(d, input$resp)
+    f1 <- column_of(d, input$treat1)
+    cat("Shapiro-Wilk test by level of", input$treat1, "\n")
+    print(tapply(vari, f1, function(v) tryCatch(shapiro.test(v)$p.value,
+                                                error = function(e) NA)))
+    if (input$fator != "one") {
+      f2 <- column_of(d, input$treat2)
+      cat("\nShapiro-Wilk test by level of", input$treat2, "\n")
+      print(tapply(vari, f2, function(v) tryCatch(shapiro.test(v)$p.value,
+                                                  error = function(e) NA)))
+    }
+  })
+
+  output$anovatable <- renderPrint({
+    invisible(run_anova(graph = FALSE))
+  })
+
+  output$gsPlot <- renderPlot({
+    d <- mydata.a()
+    vari <- column_of(d, input$resp)
+    trt1 <- column_of(d, input$treat1)
+    if (input$fator == "one") {
+      boxplot(vari ~ trt1, col = "skyblue", ylab = input$resp,
+              xlab = input$treat1)
+    } else {
+      ids <- c(input$treat1, input$treat2,
+               if (input$fator == "three") input$treat3)
+      op <- par(mfrow = c(1, length(ids)))
+      on.exit(par(op))
+      for (id in ids) {
+        boxplot(vari ~ column_of(d, id), col = "skyblue", ylab = input$resp,
+                xlab = id)
+      }
+    }
+  })
+
+  output$tukeyplot <- renderPlot({
+    capture.output(run_anova(graph = TRUE))
+  })
+}
+
+shinyApp(ui = ui, server = server)
