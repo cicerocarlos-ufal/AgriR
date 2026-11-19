@@ -1,12 +1,11 @@
-## Submission
+## Resubmission
 
-This is the first submission of AgriR.
+This is a resubmission. In this version I have:
 
-## Test environments
-
-* local: R x.y.z (sistema operacional)
-* win-builder: R-devel
-* GitHub Actions: ubuntu-latest, windows-latest, macos-latest (R release)
+* Excluded 'cran-comments.md' from the package build (.Rbuildignore), which
+  caused the NOTE "Non-standard file/directory found at top level".
+* Rewrote the Description field without the surnames of the authors of the
+  tests (Keuls, Knott, Scheffe), which were flagged as possibly misspelled.
 
 ## R CMD check results
 

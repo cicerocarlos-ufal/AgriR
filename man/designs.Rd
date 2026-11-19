@@ -10,46 +10,98 @@
 \alias{des.sp.rbd}
 \title{Randomization and sketch of experimental designs}
 \usage{
-des.crd(trt, rep, col.1 = "gray", col.2 = "white", graph.col = TRUE,
-  save = FALSE, file = "des.crd.tiff", graph = TRUE)
+des.crd(
+  trt,
+  rep,
+  col.1 = "gray",
+  col.2 = "white",
+  graph.col = TRUE,
+  save = FALSE,
+  file = "des.crd.tiff",
+  graph = TRUE
+)
 
-des.rbd(trt, rep, col.1 = "gray", col.2 = "white", graph.col = TRUE,
-  save = FALSE, file = "des.rbd.tiff", graph = TRUE)
+des.rbd(
+  trt,
+  rep,
+  col.1 = "gray",
+  col.2 = "white",
+  graph.col = TRUE,
+  save = FALSE,
+  file = "des.rbd.tiff",
+  graph = TRUE
+)
 
-des.fat2.crd(factor1, factor2, rep, col.1 = "gray", col.2 = "white",
-  graph.col = TRUE, fac.names = c("F1", "F2"), save = FALSE,
-  file = "des.fat2.crd.tiff", graph = TRUE)
+des.fat2.crd(
+  factor1,
+  factor2,
+  rep,
+  col.1 = "gray",
+  col.2 = "white",
+  graph.col = TRUE,
+  fac.names = c("F1", "F2"),
+  save = FALSE,
+  file = "des.fat2.crd.tiff",
+  graph = TRUE
+)
 
-des.fat2.rbd(factor1, factor2, rep, col.1 = "gray", col.2 = "white",
-  graph.col = TRUE, fac.names = c("F1", "F2"), save = FALSE,
-  file = "des.fat2.rbd.tiff", graph = TRUE)
+des.fat2.rbd(
+  factor1,
+  factor2,
+  rep,
+  col.1 = "gray",
+  col.2 = "white",
+  graph.col = TRUE,
+  fac.names = c("F1", "F2"),
+  save = FALSE,
+  file = "des.fat2.rbd.tiff",
+  graph = TRUE
+)
 
-des.sp.crd(factor1, factor2, rep, col.1 = "gray", col.2 = "white",
-  graph.col = TRUE, fac.names = c("F1", "F2"), save = FALSE,
-  file = "des.sp.crd.tiff", graph = TRUE)
+des.sp.crd(
+  factor1,
+  factor2,
+  rep,
+  col.1 = "gray",
+  col.2 = "white",
+  graph.col = TRUE,
+  fac.names = c("F1", "F2"),
+  save = FALSE,
+  file = "des.sp.crd.tiff",
+  graph = TRUE
+)
 
-des.sp.rbd(factor1, factor2, rep, col.1 = "gray", col.2 = "white",
-  graph.col = TRUE, fac.names = c("F1", "F2"), save = FALSE,
-  file = "des.sp.rbd.tiff", graph = TRUE)
+des.sp.rbd(
+  factor1,
+  factor2,
+  rep,
+  col.1 = "gray",
+  col.2 = "white",
+  graph.col = TRUE,
+  fac.names = c("F1", "F2"),
+  save = FALSE,
+  file = "des.sp.rbd.tiff",
+  graph = TRUE
+)
 }
 \arguments{
 \item{trt}{Number of treatments.}
 
 \item{rep}{Number of replications (or blocks).}
 
-\item{col.1,col.2}{Colors used to build the palette of the treatments.}
+\item{col.1, col.2}{Colors used to build the palette of the treatments.}
 
 \item{graph.col}{Logical. If \code{TRUE} (default), the cells are
-  colored by treatment; if \code{FALSE}, they are white.}
+colored by treatment; if \code{FALSE}, they are white.}
 
 \item{save}{Logical. If \code{TRUE}, the sketch is also saved as a TIFF
-  file in the working directory.}
+file in the working directory.}
 
 \item{file}{Name of the TIFF file (used when \code{save = TRUE}).}
 
 \item{graph}{Logical. If \code{FALSE}, nothing is drawn.}
 
-\item{factor1,factor2}{Number of levels of factors 1 and 2.}
+\item{factor1, factor2}{Number of levels of factors 1 and 2.}
 
 \item{fac.names}{Names of factors 1 and 2 (shown in the title).}
 }

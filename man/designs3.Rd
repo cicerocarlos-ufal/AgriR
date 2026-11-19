@@ -8,36 +8,76 @@
 \alias{des.ssp.rbd}
 \title{Randomization and sketch of designs with three factors}
 \usage{
-des.fat3.crd(factor1, factor2, factor3, rep, col.1 = "gray", col.2 = "white",
-  graph.col = TRUE, fac.names = c("F1", "F2", "F3"), save = FALSE,
-  file = "des.fat3.crd.tiff", graph = TRUE)
+des.fat3.crd(
+  factor1,
+  factor2,
+  factor3,
+  rep,
+  col.1 = "gray",
+  col.2 = "white",
+  graph.col = TRUE,
+  fac.names = c("F1", "F2", "F3"),
+  save = FALSE,
+  file = "des.fat3.crd.tiff",
+  graph = TRUE
+)
 
-des.fat3.rbd(factor1, factor2, factor3, rep, col.1 = "gray", col.2 = "white",
-  graph.col = TRUE, fac.names = c("F1", "F2", "F3"), save = FALSE,
-  file = "des.fat3.rbd.tiff", graph = TRUE)
+des.fat3.rbd(
+  factor1,
+  factor2,
+  factor3,
+  rep,
+  col.1 = "gray",
+  col.2 = "white",
+  graph.col = TRUE,
+  fac.names = c("F1", "F2", "F3"),
+  save = FALSE,
+  file = "des.fat3.rbd.tiff",
+  graph = TRUE
+)
 
-des.ssp.crd(factor1, factor2, factor3, rep, col.1 = "gray", col.2 = "white",
-  graph.col = TRUE, fac.names = c("F1", "F2", "F3"), save = FALSE,
-  file = "des.ssp.crd.tiff", graph = TRUE)
+des.ssp.crd(
+  factor1,
+  factor2,
+  factor3,
+  rep,
+  col.1 = "gray",
+  col.2 = "white",
+  graph.col = TRUE,
+  fac.names = c("F1", "F2", "F3"),
+  save = FALSE,
+  file = "des.ssp.crd.tiff",
+  graph = TRUE
+)
 
-des.ssp.rbd(factor1, factor2, factor3, rep, col.1 = "gray", col.2 = "white",
-  graph.col = TRUE, fac.names = c("F1", "F2", "F3"), save = FALSE,
-  file = "des.ssp.rbd.tiff", graph = TRUE)
+des.ssp.rbd(
+  factor1,
+  factor2,
+  factor3,
+  rep,
+  col.1 = "gray",
+  col.2 = "white",
+  graph.col = TRUE,
+  fac.names = c("F1", "F2", "F3"),
+  save = FALSE,
+  file = "des.ssp.rbd.tiff",
+  graph = TRUE
+)
 }
 \arguments{
-\item{factor1,factor2,factor3}{Number of levels of factors 1, 2 and 3.}
+\item{factor1, factor2, factor3}{Number of levels of factors 1, 2 and 3.}
 
 \item{rep}{Number of replications (or blocks).}
 
-\item{col.1,col.2}{Colors used to build the palette of the treatments.}
+\item{col.1, col.2}{Colors used to build the palette of the treatments.}
 
 \item{graph.col}{Logical. If \code{TRUE} (default), the cells are
-  colored by treatment; if \code{FALSE}, they are white.}
+colored by treatment; if \code{FALSE}, they are white.}
 
 \item{fac.names}{Names of the three factors (shown in the title).}
 
 \item{save}{Logical. If \code{TRUE}, the sketch is also saved as a TIFF
-  file in the working directory.}
+file in the working directory.}
 
 \item{file}{Name of the TIFF file (used when \code{save = TRUE}).}
 

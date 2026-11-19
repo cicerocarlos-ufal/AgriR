@@ -22,12 +22,11 @@ Description: Tools for teaching and analysing agricultural experiments.
     designs; performs analysis of variance for completely randomized,
     randomized block and Latin square designs, double and triple factorial,
     split-plot and split-split-plot schemes, with unfolding of significant
-    interactions; multiple comparison tests (Tukey, Duncan, LSD,
-    Student-Newman-Keuls, Scheffe and Scott and Knott (1974)
-    <doi:10.2307/2529204>); polynomial regression for quantitative factors;
-    descriptive statistics, frequency tables and histograms; and didactic
-    simulations of confidence intervals and mean tests, also available
-    through an interactive 'shiny' application.
+    interactions; six multiple comparison tests, including the Tukey test
+    and a cluster-based grouping of means; polynomial regression for
+    quantitative factors; descriptive statistics, frequency tables and
+    histograms; and didactic simulations of confidence intervals and mean
+    tests, also available through an interactive 'shiny' application.
 License: GPL (>= 2)
 URL: https://github.com/cicerocarlos-ufal/AgriR
 BugReports: https://github.com/cicerocarlos-ufal/AgriR/issues

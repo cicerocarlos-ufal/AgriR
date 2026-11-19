@@ -14,6 +14,7 @@ functions are also available through an interactive application
 started with \code{\link{run_app}}.
 }
 \section{Main functions}{
+
 \itemize{
   \item Designs: \code{\link{des.crd}}, \code{\link{des.rbd}},
     \code{\link{des.fat2.crd}}, \code{\link{des.fat2.rbd}},
@@ -35,4 +36,25 @@ started with \code{\link{run_app}}.
 }
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/cicerocarlos-ufal/AgriR}
+  \item Report bugs at \url{https://github.com/cicerocarlos-ufal/AgriR/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Cicero Carlos de Souza Almeida \email{cicero@arapiraca.ufal.br}
+
+Other contributors:
+\itemize{
+  \item Eric B. Ferreira (Code adapted from the ExpDes package) [contributor]
+  \item Denismar A. Nogueira (Code adapted from the ExpDes package) [contributor]
+  \item Portya P. Cavalcanti (Code adapted from the ExpDes package) [contributor]
+  \item Felipe de Mendiburu (Grouping algorithms adapted from the agricolae package) [contributor]
+  \item Laercio Junio da Silva (Original Scott-Knott implementation) [contributor]
+}
+
+}
 \keyword{internal}

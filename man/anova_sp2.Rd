@@ -6,17 +6,49 @@
 \alias{anova_sp2_rbd}
 \title{Analysis of variance: split-plot scheme}
 \usage{
-anova_sp2_crd(factor1, factor2, repet, resp, quali = c(TRUE, TRUE),
-  fac.fix = "fac.A", fac.names = c("fac.A", "fac.B"), graph = TRUE,
-  graph.type = "barplotb", graph.col = "skyblue", xlab = "Treatments",
-  ylab = "Variable", graph.den = 2, mcomp = "tukey", sigF = 0.05,
-  best.fit = TRUE, main = "", sigT = sigF, ...)
+anova_sp2_crd(
+  factor1,
+  factor2,
+  repet,
+  resp,
+  quali = c(TRUE, TRUE),
+  fac.fix = "fac.A",
+  fac.names = c("fac.A", "fac.B"),
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  graph.den = 2,
+  mcomp = "tukey",
+  sigF = 0.05,
+  best.fit = TRUE,
+  main = "",
+  sigT = sigF,
+  ...
+)
 
-anova_sp2_rbd(factor1, factor2, block, resp, quali = c(TRUE, TRUE),
-  fac.fix = "fac.A", fac.names = c("fac.A", "fac.B"), graph = TRUE,
-  graph.type = "barplotb", graph.col = "skyblue", xlab = "Treatments",
-  ylab = "Variable", graph.den = 2, mcomp = "tukey", sigF = 0.05,
-  best.fit = TRUE, main = "", sigT = sigF, ...)
+anova_sp2_rbd(
+  factor1,
+  factor2,
+  block,
+  resp,
+  quali = c(TRUE, TRUE),
+  fac.fix = "fac.A",
+  fac.names = c("fac.A", "fac.B"),
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  graph.den = 2,
+  mcomp = "tukey",
+  sigF = 0.05,
+  best.fit = TRUE,
+  main = "",
+  sigT = sigF,
+  ...
+)
 }
 \arguments{
 \item{factor1}{Vector with the levels of factor 1 (plots).}
@@ -24,51 +56,51 @@ anova_sp2_rbd(factor1, factor2, block, resp, quali = c(TRUE, TRUE),
 \item{factor2}{Vector with the levels of factor 2 (split-plots).}
 
 \item{repet}{Vector with the repetitions (\code{anova_sp2_crd}). It
-  identifies the plots: the plots of the same level of factor 1 must have
-  different repetition numbers.}
+identifies the plots: the plots of the same level of factor 1 must have
+different repetition numbers.}
 
 \item{resp}{Numeric vector with the response variable.}
 
 \item{quali}{Logical vector of length 2: \code{TRUE} for a qualitative
-  factor, \code{FALSE} for a quantitative factor.}
+factor, \code{FALSE} for a quantitative factor.}
 
 \item{fac.fix}{How a significant interaction is unfolded: \code{"fac.A"}
-  (factor 1 inside the levels of factor 2, default) or \code{"fac.B"}
-  (factor 2 inside the levels of factor 1).}
+(factor 1 inside the levels of factor 2, default) or \code{"fac.B"}
+(factor 2 inside the levels of factor 1).}
 
 \item{fac.names}{Names of factors 1 and 2, used in the output.}
 
 \item{graph}{Logical. If \code{TRUE} (default), graphs are drawn.}
 
 \item{graph.type}{Type of graph of the multiple comparison test:
-  \code{"barplotb"}, \code{"barplotg"}, \code{"pointplotg"} or
-  \code{"boxplotb"}.}
+\code{"barplotb"}, \code{"barplotg"}, \code{"pointplotg"} or
+\code{"boxplotb"}.}
 
 \item{graph.col}{Color used in the graphs.}
 
-\item{xlab,ylab}{Axis labels.}
+\item{xlab, ylab}{Axis labels.}
 
 \item{graph.den}{Density of the shading lines of the bars
-  (\code{"barplotb"}); \code{NULL} for solid bars.}
+(\code{"barplotb"}); \code{NULL} for solid bars.}
 
 \item{mcomp}{Multiple comparison test: \code{"tukey"} (default),
-  \code{"duncan"}, \code{"lsd"}, \code{"snk"}, \code{"scottknott"} (or
-  \code{"sk"}) or \code{"scheffe"}.}
+\code{"duncan"}, \code{"lsd"}, \code{"snk"}, \code{"scottknott"} (or
+\code{"sk"}) or \code{"scheffe"}.}
 
 \item{sigF}{Significance level of the F test and of the multiple
-  comparison test (default 0.05).}
+comparison test (default 0.05).}
 
 \item{best.fit}{Logical. Passed to \code{\link{reg.poly}}: if \code{TRUE}
-  (default), only the best regression model is drawn.}
+(default), only the best regression model is drawn.}
 
 \item{main}{Title of the graphs (not used: the graphs receive the names
-  of the factors); kept for compatibility.}
+of the factors); kept for compatibility.}
 
 \item{sigT}{Significance level of the multiple comparison tests. By
-  default, the same as \code{sigF}.}
+default, the same as \code{sigF}.}
 
 \item{...}{Ignored (kept for compatibility with old arguments such as
-  \code{nl} and \code{hvar}).}
+\code{nl} and \code{hvar}).}
 
 \item{block}{Vector with the blocks (\code{anova_sp2_rbd}).}
 }

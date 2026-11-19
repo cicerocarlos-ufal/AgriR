@@ -8,7 +8,7 @@ run_app(...)
 }
 \arguments{
 \item{...}{Arguments passed to \code{\link[shiny]{runApp}} (for example
-  \code{launch.browser = TRUE} or \code{port = 8080}).}
+\code{launch.browser = TRUE} or \code{port = 8080}).}
 }
 \value{
 Called for its side effect (runs the application).

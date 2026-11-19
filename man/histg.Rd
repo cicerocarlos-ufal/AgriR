@@ -4,26 +4,34 @@
 \alias{histg}
 \title{Histogram with frequency table}
 \usage{
-histg(y, xlab = "Distribution", ylab = "Frequency", graph.col = "turquoise",
-  scores = "empiric", border = TRUE, freq = TRUE, graph.type = "base",
-  main = "")
+histg(
+  y,
+  xlab = "Distribution",
+  ylab = "Frequency",
+  graph.col = "turquoise",
+  scores = "empiric",
+  border = TRUE,
+  freq = TRUE,
+  graph.type = "base",
+  main = ""
+)
 }
 \arguments{
 \item{y}{Numeric vector.}
 
-\item{xlab,ylab}{Axis labels.}
+\item{xlab, ylab}{Axis labels.}
 
 \item{graph.col}{Color of the bars.}
 
 \item{scores}{Rule used to choose the number of classes: \code{"empiric"}
-  (square root of n), \code{"sturges"}, \code{"ricerule"}, \code{"scott"}
-  or \code{"fd"} (Freedman-Diaconis).}
+(square root of n), \code{"sturges"}, \code{"ricerule"}, \code{"scott"}
+or \code{"fd"} (Freedman-Diaconis).}
 
 \item{border}{Color of the borders of the bars (\code{TRUE} uses the
-  default color).}
+default color).}
 
 \item{freq}{Logical. If \code{TRUE}, frequencies are drawn; if
-  \code{FALSE}, densities.}
+\code{FALSE}, densities.}
 
 \item{graph.type}{\code{"base"} (default) or \code{"ggplot2"}.}
 

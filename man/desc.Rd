@@ -4,18 +4,24 @@
 \alias{desc}
 \title{Descriptive statistics}
 \usage{
-desc(y, x = 1, boxplot = FALSE, xlab = "Treatments", ylab = "Variable",
-  graph.col = "skyblue")
+desc(
+  y,
+  x = 1,
+  boxplot = FALSE,
+  xlab = "Treatments",
+  ylab = "Variable",
+  graph.col = "skyblue"
+)
 }
 \arguments{
 \item{y}{Numeric vector.}
 
 \item{x}{Optional vector of groups (same length as \code{y}). When omitted,
-  statistics are computed for the whole variable.}
+statistics are computed for the whole variable.}
 
 \item{boxplot}{Logical. If \code{TRUE}, a boxplot is drawn.}
 
-\item{xlab,ylab}{Axis labels of the boxplot.}
+\item{xlab, ylab}{Axis labels of the boxplot.}
 
 \item{graph.col}{Color of the boxes.}
 }

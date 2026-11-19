@@ -6,56 +6,83 @@
 \alias{anova_fat2_rbd}
 \title{Analysis of variance: double factorial scheme}
 \usage{
-anova_fat2_crd(factor1, factor2, resp, quali = c(TRUE, TRUE),
-  fac.names = c("F1", "F2"), fac.fix = "fac.A", graph = TRUE,
-  graph.type = "barplotb", graph.col = "skyblue", xlab = "Treatments",
-  ylab = "Variable", main = "", graph.den = 2, mcomp = "tukey", best.fit = TRUE,
-  sigF = 0.05)
+anova_fat2_crd(
+  factor1,
+  factor2,
+  resp,
+  quali = c(TRUE, TRUE),
+  fac.names = c("F1", "F2"),
+  fac.fix = "fac.A",
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  main = "",
+  graph.den = 2,
+  mcomp = "tukey",
+  best.fit = TRUE,
+  sigF = 0.05
+)
 
-anova_fat2_rbd(factor1, factor2, block, resp, quali = c(TRUE, TRUE),
-  fac.names = c("F1", "F2"), fac.fix = "fac.A", graph = TRUE,
-  graph.type = "barplotb", graph.col = "skyblue", xlab = "Treatments",
-  ylab = "Variable", main = "", graph.den = 2, mcomp = "tukey", best.fit = TRUE,
-  sigF = 0.05)
+anova_fat2_rbd(
+  factor1,
+  factor2,
+  block,
+  resp,
+  quali = c(TRUE, TRUE),
+  fac.names = c("F1", "F2"),
+  fac.fix = "fac.A",
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  main = "",
+  graph.den = 2,
+  mcomp = "tukey",
+  best.fit = TRUE,
+  sigF = 0.05
+)
 }
 \arguments{
-\item{factor1,factor2}{Vectors with the levels of factors 1 and 2.}
+\item{factor1, factor2}{Vectors with the levels of factors 1 and 2.}
 
 \item{resp}{Numeric vector with the response variable.}
 
 \item{quali}{Logical vector of length 2: \code{TRUE} for a qualitative
-  factor, \code{FALSE} for a quantitative factor.}
+factor, \code{FALSE} for a quantitative factor.}
 
 \item{fac.names}{Names of factors 1 and 2, used in the output.}
 
 \item{fac.fix}{How a significant interaction is unfolded: \code{"fac.A"}
-  (factor 1 inside the levels of factor 2, default) or \code{"fac.B"}
-  (factor 2 inside the levels of factor 1).}
+(factor 1 inside the levels of factor 2, default) or \code{"fac.B"}
+(factor 2 inside the levels of factor 1).}
 
 \item{graph}{Logical. If \code{TRUE} (default), graphs are drawn.}
 
 \item{graph.type}{Type of graph of the multiple comparison test:
-  \code{"barplotb"}, \code{"barplotg"}, \code{"pointplotg"} or
-  \code{"boxplotb"}.}
+\code{"barplotb"}, \code{"barplotg"}, \code{"pointplotg"} or
+\code{"boxplotb"}.}
 
 \item{graph.col}{Color used in the graphs.}
 
-\item{xlab,ylab}{Axis labels.}
+\item{xlab, ylab}{Axis labels.}
 
 \item{main}{Title of the graph.}
 
 \item{graph.den}{Density of the shading lines of the bars
-  (\code{"barplotb"}); \code{NULL} for solid bars.}
+(\code{"barplotb"}); \code{NULL} for solid bars.}
 
 \item{mcomp}{Multiple comparison test: \code{"tukey"} (default),
-  \code{"duncan"}, \code{"lsd"}, \code{"snk"}, \code{"scottknott"} (or
-  \code{"sk"}) or \code{"scheffe"}.}
+\code{"duncan"}, \code{"lsd"}, \code{"snk"}, \code{"scottknott"} (or
+\code{"sk"}) or \code{"scheffe"}.}
 
 \item{best.fit}{Logical. Passed to \code{\link{reg.poly}}: if \code{TRUE}
-  (default), only the best regression model is drawn.}
+(default), only the best regression model is drawn.}
 
 \item{sigF}{Significance level of the F test and of the multiple
-  comparison test (default 0.05).}
+comparison test (default 0.05).}
 
 \item{block}{Vector with the blocks (\code{anova_fat2_rbd}).}
 }

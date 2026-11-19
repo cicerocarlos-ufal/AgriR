@@ -17,20 +17,20 @@ means.test(mean1, mean2, sd1, sd2, n1, n2, alpha = 0.05)
 par.test(data1, data2, alpha = 0.05)
 }
 \arguments{
-\item{mean,sd,n}{Mean, standard deviation and sample size.}
+\item{mean, sd, n}{Mean, standard deviation and sample size.}
 
 \item{dist}{Distribution used for the interval: \code{"normal"} or
-  \code{"t"}.}
+\code{"t"}.}
 
 \item{alpha}{Significance level (the confidence level is
-  \code{1 - alpha}).}
+\code{1 - alpha}).}
 
 \item{variable}{Numeric vector (a sample).}
 
-\item{mean1,mean2,sd1,sd2,n1,n2}{Means, standard deviations and sample
-  sizes of the two groups.}
+\item{mean1, mean2, sd1, sd2, n1, n2}{Means, standard deviations and sample
+sizes of the two groups.}
 
-\item{data1,data2}{Numeric vectors with the two samples.}
+\item{data1, data2}{Numeric vectors with the two samples.}
 }
 \value{
 \code{aproximate} and \code{int.confidance}: invisibly, a list

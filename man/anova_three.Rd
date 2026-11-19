@@ -8,72 +8,128 @@
 \alias{anova_ssp_rbd}
 \title{Analysis of variance: experiments with three factors}
 \usage{
-anova_fat3_crd(factor1, factor2, factor3, resp, quali = c(TRUE, TRUE, TRUE),
-  fac.names = c("F1", "F2", "F3"), graph = TRUE, graph.type = "barplotb",
-  graph.col = "skyblue", xlab = "Treatments", ylab = "Variable", graph.den = 2,
-  mcomp = "tukey", best.fit = TRUE, sigF = 0.05, sigT = sigF)
+anova_fat3_crd(
+  factor1,
+  factor2,
+  factor3,
+  resp,
+  quali = c(TRUE, TRUE, TRUE),
+  fac.names = c("F1", "F2", "F3"),
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  graph.den = 2,
+  mcomp = "tukey",
+  best.fit = TRUE,
+  sigF = 0.05,
+  sigT = sigF
+)
 
-anova_fat3_rbd(factor1, factor2, factor3, block, resp,
-  quali = c(TRUE, TRUE, TRUE), fac.names = c("F1", "F2", "F3"), graph = TRUE,
-  graph.type = "barplotb", graph.col = "skyblue", xlab = "Treatments",
-  ylab = "Variable", graph.den = 2, mcomp = "tukey", best.fit = TRUE,
-  sigF = 0.05, sigT = sigF)
+anova_fat3_rbd(
+  factor1,
+  factor2,
+  factor3,
+  block,
+  resp,
+  quali = c(TRUE, TRUE, TRUE),
+  fac.names = c("F1", "F2", "F3"),
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  graph.den = 2,
+  mcomp = "tukey",
+  best.fit = TRUE,
+  sigF = 0.05,
+  sigT = sigF
+)
 
-anova_ssp_crd(factor1, factor2, factor3, repet, resp,
-  quali = c(TRUE, TRUE, TRUE), fac.names = c("F1", "F2", "F3"), graph = TRUE,
-  graph.type = "barplotb", graph.col = "skyblue", xlab = "Treatments",
-  ylab = "Variable", graph.den = 2, mcomp = "tukey", best.fit = TRUE,
-  sigF = 0.05, sigT = sigF)
+anova_ssp_crd(
+  factor1,
+  factor2,
+  factor3,
+  repet,
+  resp,
+  quali = c(TRUE, TRUE, TRUE),
+  fac.names = c("F1", "F2", "F3"),
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  graph.den = 2,
+  mcomp = "tukey",
+  best.fit = TRUE,
+  sigF = 0.05,
+  sigT = sigF
+)
 
-anova_ssp_rbd(factor1, factor2, factor3, block, resp,
-  quali = c(TRUE, TRUE, TRUE), fac.names = c("F1", "F2", "F3"), graph = TRUE,
-  graph.type = "barplotb", graph.col = "skyblue", xlab = "Treatments",
-  ylab = "Variable", graph.den = 2, mcomp = "tukey", best.fit = TRUE,
-  sigF = 0.05, sigT = sigF)
+anova_ssp_rbd(
+  factor1,
+  factor2,
+  factor3,
+  block,
+  resp,
+  quali = c(TRUE, TRUE, TRUE),
+  fac.names = c("F1", "F2", "F3"),
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  graph.den = 2,
+  mcomp = "tukey",
+  best.fit = TRUE,
+  sigF = 0.05,
+  sigT = sigF
+)
 }
 \arguments{
-\item{factor1,factor2,factor3}{Vectors with the levels of factors 1, 2
-  and 3. In the split-split-plot scheme they are, respectively, the
-  factors of the plots, split-plots and split-split-plots.}
+\item{factor1, factor2, factor3}{Vectors with the levels of factors 1, 2
+and 3. In the split-split-plot scheme they are, respectively, the
+factors of the plots, split-plots and split-split-plots.}
 
 \item{resp}{Numeric vector with the response variable.}
 
 \item{quali}{Logical vector of length 3: \code{TRUE} for a qualitative
-  factor, \code{FALSE} for a quantitative factor.}
+factor, \code{FALSE} for a quantitative factor.}
 
 \item{fac.names}{Names of the three factors, used in the output.}
 
 \item{graph}{Logical. If \code{TRUE} (default), graphs are drawn.}
 
 \item{graph.type}{Type of graph of the multiple comparison test:
-  \code{"barplotb"}, \code{"barplotg"}, \code{"pointplotg"} or
-  \code{"boxplotb"}.}
+\code{"barplotb"}, \code{"barplotg"}, \code{"pointplotg"} or
+\code{"boxplotb"}.}
 
 \item{graph.col}{Color used in the graphs.}
 
-\item{xlab,ylab}{Axis labels.}
+\item{xlab, ylab}{Axis labels.}
 
 \item{graph.den}{Density of the shading lines of the bars
-  (\code{"barplotb"}); \code{NULL} for solid bars.}
+(\code{"barplotb"}); \code{NULL} for solid bars.}
 
 \item{mcomp}{Multiple comparison test: \code{"tukey"} (default),
-  \code{"duncan"}, \code{"lsd"}, \code{"snk"}, \code{"scottknott"} (or
-  \code{"sk"}) or \code{"scheffe"}.}
+\code{"duncan"}, \code{"lsd"}, \code{"snk"}, \code{"scottknott"} (or
+\code{"sk"}) or \code{"scheffe"}.}
 
 \item{best.fit}{Logical. Passed to \code{\link{reg.poly}}: if \code{TRUE}
-  (default), only the best regression model is drawn.}
+(default), only the best regression model is drawn.}
 
 \item{sigF}{Significance level of the F test and of the multiple
-  comparison test (default 0.05).}
+comparison test (default 0.05).}
 
 \item{sigT}{Significance level of the multiple comparison tests. By
-  default, the same as \code{sigF}.}
+default, the same as \code{sigF}.}
 
 \item{block}{Vector with the blocks (RBD functions).}
 
 \item{repet}{Vector with the repetitions (\code{anova_ssp_crd}). It
-  identifies the plots: the plots of the same level of factor 1 must have
-  different repetition numbers.}
+identifies the plots: the plots of the same level of factor 1 must have
+different repetition numbers.}
 }
 \value{
 Invisibly, a list with \code{Anova}, \code{Shapiro.test},

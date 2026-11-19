@@ -8,34 +8,63 @@
 \alias{pointplotg}
 \title{Graphs of multiple comparison tests}
 \usage{
-barplotb(table.graph, xlab = "", ylab = "", graph.col = "skyblue",
-  graph.den = NULL, main = "")
+barplotb(
+  table.graph,
+  xlab = "",
+  ylab = "",
+  graph.col = "skyblue",
+  graph.den = NULL,
+  main = ""
+)
 
-boxplotb(y, trt, table.graph, xlab = "", ylab = "", graph.col = "skyblue",
-  main = "")
+boxplotb(
+  y,
+  trt,
+  table.graph,
+  xlab = "",
+  ylab = "",
+  graph.col = "skyblue",
+  main = ""
+)
 
-barplotg(table.graph, xlab = "", ylab = "", title = "", caption = "",
-  graph.col = "skyblue", barcolor = "orange", main = "")
+barplotg(
+  table.graph,
+  xlab = "",
+  ylab = "",
+  title = "",
+  caption = "",
+  graph.col = "skyblue",
+  barcolor = "orange",
+  main = ""
+)
 
-pointplotg(table.graph, xlab = "", ylab = "", title = "", caption = "",
-  graph.col = "black", barcolor = "orange", main = "")
+pointplotg(
+  table.graph,
+  xlab = "",
+  ylab = "",
+  title = "",
+  caption = "",
+  graph.col = "black",
+  barcolor = "orange",
+  main = ""
+)
 }
 \arguments{
 \item{table.graph}{Data frame returned by the multiple comparison tests
-  (see \code{\link{tukey}}): columns with the means, standard deviations,
-  upper and lower limits of the error bars and the letters (in this
-  order), with the treatments as row names.}
+(see \code{\link{tukey}}): columns with the means, standard deviations,
+upper and lower limits of the error bars and the letters (in this
+order), with the treatments as row names.}
 
-\item{xlab,ylab}{Axis labels.}
+\item{xlab, ylab}{Axis labels.}
 
 \item{graph.col}{Color of the bars, boxes or points.}
 
 \item{graph.den}{Density of the shading lines of the bars (\code{NULL}
-  for solid bars).}
+for solid bars).}
 
-\item{main,title}{Title of the graph.}
+\item{main, title}{Title of the graph.}
 
-\item{y,trt}{Response variable and treatments (\code{boxplotb} only).}
+\item{y, trt}{Response variable and treatments (\code{boxplotb} only).}
 
 \item{caption}{Caption of the graph (ggplot2 graphs).}
 

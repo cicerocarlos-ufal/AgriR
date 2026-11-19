@@ -12,7 +12,7 @@ tapply.stat(y, x, stat = "mean")
 \item{x}{A vector or data frame with the factors.}
 
 \item{stat}{Name of the function (or the function itself) used to
-  summarise each group, e.g. \code{"mean"}, \code{"sd"}, \code{"length"}.}
+summarise each group, e.g. \code{"mean"}, \code{"sd"}, \code{"length"}.}
 }
 \value{
 A data frame with one row per group: the levels of the factors

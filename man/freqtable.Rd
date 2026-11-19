@@ -10,7 +10,7 @@ freqtable(y, bins)
 \item{y}{Numeric vector.}
 
 \item{bins}{Either the number of classes or a vector of break points,
-  as accepted by \code{\link[base]{cut}}.}
+as accepted by \code{\link[base]{cut}}.}
 }
 \value{
 A data frame with the columns \code{Class}, \code{Class limits},

@@ -10,29 +10,101 @@
 \alias{scottknott}
 \title{Multiple comparison tests}
 \usage{
-tukey(y, trt, DFerror, SSerror, alpha = 0.05, graph = TRUE,
-  graph.col = "skyblue", graph.den = NULL, graph.type = "barplotb", xlab = "",
-  ylab = "", group = TRUE, main = "")
+tukey(
+  y,
+  trt,
+  DFerror,
+  SSerror,
+  alpha = 0.05,
+  graph = TRUE,
+  graph.col = "skyblue",
+  graph.den = NULL,
+  graph.type = "barplotb",
+  xlab = "",
+  ylab = "",
+  group = TRUE,
+  main = ""
+)
 
-lsd(y, trt, DFerror, SSerror, alpha = 0.05, graph = TRUE, graph.col = "skyblue",
-  graph.den = NULL, graph.type = "barplotb", xlab = "", ylab = "", group = TRUE,
-  main = "")
+lsd(
+  y,
+  trt,
+  DFerror,
+  SSerror,
+  alpha = 0.05,
+  graph = TRUE,
+  graph.col = "skyblue",
+  graph.den = NULL,
+  graph.type = "barplotb",
+  xlab = "",
+  ylab = "",
+  group = TRUE,
+  main = ""
+)
 
-duncan(y, trt, DFerror, SSerror, alpha = 0.05, graph = TRUE,
-  graph.col = "skyblue", graph.den = NULL, graph.type = "barplotb", xlab = "",
-  ylab = "", group = TRUE, main = "")
+duncan(
+  y,
+  trt,
+  DFerror,
+  SSerror,
+  alpha = 0.05,
+  graph = TRUE,
+  graph.col = "skyblue",
+  graph.den = NULL,
+  graph.type = "barplotb",
+  xlab = "",
+  ylab = "",
+  group = TRUE,
+  main = ""
+)
 
-snk(y, trt, DFerror, SSerror, alpha = 0.05, graph = TRUE, graph.col = "skyblue",
-  graph.den = NULL, graph.type = "barplotb", xlab = "", ylab = "", group = TRUE,
-  main = "")
+snk(
+  y,
+  trt,
+  DFerror,
+  SSerror,
+  alpha = 0.05,
+  graph = TRUE,
+  graph.col = "skyblue",
+  graph.den = NULL,
+  graph.type = "barplotb",
+  xlab = "",
+  ylab = "",
+  group = TRUE,
+  main = ""
+)
 
-scheffe(y, trt, DFerror, SSerror, alpha = 0.05, graph = TRUE,
-  graph.col = "skyblue", graph.den = NULL, graph.type = "barplotb", xlab = "",
-  ylab = "", group = TRUE, main = "")
+scheffe(
+  y,
+  trt,
+  DFerror,
+  SSerror,
+  alpha = 0.05,
+  graph = TRUE,
+  graph.col = "skyblue",
+  graph.den = NULL,
+  graph.type = "barplotb",
+  xlab = "",
+  ylab = "",
+  group = TRUE,
+  main = ""
+)
 
-scottknott(y, trt, DFerror, SSerror, alpha = 0.05, graph = TRUE,
-  graph.col = "skyblue", graph.den = NULL, graph.type = "barplotb", xlab = "",
-  ylab = "", group = TRUE, main = "")
+scottknott(
+  y,
+  trt,
+  DFerror,
+  SSerror,
+  alpha = 0.05,
+  graph = TRUE,
+  graph.col = "skyblue",
+  graph.den = NULL,
+  graph.type = "barplotb",
+  xlab = "",
+  ylab = "",
+  group = TRUE,
+  main = ""
+)
 }
 \arguments{
 \item{y}{Numeric vector with the response variable.}
@@ -50,16 +122,16 @@ scottknott(y, trt, DFerror, SSerror, alpha = 0.05, graph = TRUE,
 \item{graph.col}{Color of the bars, boxes or points.}
 
 \item{graph.den}{Density of the shading lines of the bars
-  (\code{graph.type = "barplotb"} only); \code{NULL} for solid bars.}
+(\code{graph.type = "barplotb"} only); \code{NULL} for solid bars.}
 
 \item{graph.type}{Type of graph: \code{"barplotb"} (base bar plot),
-  \code{"barplotg"} (ggplot2 bar plot), \code{"pointplotg"} (ggplot2 point
-  plot) or \code{"boxplotb"} (base box plot).}
+\code{"barplotg"} (ggplot2 bar plot), \code{"pointplotg"} (ggplot2 point
+plot) or \code{"boxplotb"} (base box plot).}
 
-\item{xlab,ylab}{Axis labels.}
+\item{xlab, ylab}{Axis labels.}
 
 \item{group}{Logical. Only the grouping of means is implemented; kept for
-  compatibility.}
+compatibility.}
 
 \item{main}{Title of the graph.}
 }

@@ -7,19 +7,57 @@
 \alias{latsd}
 \title{Analysis of variance: one factor experiments}
 \usage{
-anova_crd(treat, resp, quali = TRUE, graph = TRUE, graph.type = "barplotb",
-  graph.col = "skyblue", xlab = "Treatments", ylab = "Variable", main = "",
-  graph.den = 2, mcomp = "tukey", best.fit = TRUE, sigF = 0.05)
+anova_crd(
+  treat,
+  resp,
+  quali = TRUE,
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  main = "",
+  graph.den = 2,
+  mcomp = "tukey",
+  best.fit = TRUE,
+  sigF = 0.05
+)
 
-anova_rbd(treat, resp, block, quali = TRUE, graph = TRUE,
-  graph.type = "barplotb", graph.col = "skyblue", xlab = "Treatments",
-  ylab = "Variable", main = "", graph.den = 2, mcomp = "tukey", best.fit = TRUE,
-  sigF = 0.05)
+anova_rbd(
+  treat,
+  resp,
+  block,
+  quali = TRUE,
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  main = "",
+  graph.den = 2,
+  mcomp = "tukey",
+  best.fit = TRUE,
+  sigF = 0.05
+)
 
-latsd(treat, row, column, resp, quali = TRUE, mcomp = "tukey", sigT = 0.05,
-  sigF = 0.05, graph = TRUE, graph.type = "barplotb", graph.col = "skyblue",
-  xlab = "Treatments", ylab = "Variable", main = "", graph.den = 2,
-  best.fit = TRUE)
+latsd(
+  treat,
+  row,
+  column,
+  resp,
+  quali = TRUE,
+  mcomp = "tukey",
+  sigT = 0.05,
+  sigF = 0.05,
+  graph = TRUE,
+  graph.type = "barplotb",
+  graph.col = "skyblue",
+  xlab = "Treatments",
+  ylab = "Variable",
+  main = "",
+  graph.den = 2,
+  best.fit = TRUE
+)
 }
 \arguments{
 \item{treat}{Vector with the treatments.}
@@ -27,41 +65,41 @@ latsd(treat, row, column, resp, quali = TRUE, mcomp = "tukey", sigT = 0.05,
 \item{resp}{Numeric vector with the response variable.}
 
 \item{quali}{Logical. If \code{TRUE} (default), the treatments are
-  qualitative and a multiple comparison test is applied; if \code{FALSE},
-  they are quantitative and a polynomial regression is fitted
-  (\code{\link{reg.poly}}).}
+qualitative and a multiple comparison test is applied; if \code{FALSE},
+they are quantitative and a polynomial regression is fitted
+(\code{\link{reg.poly}}).}
 
 \item{graph}{Logical. If \code{TRUE} (default), graphs are drawn.}
 
 \item{graph.type}{Type of graph of the multiple comparison test:
-  \code{"barplotb"}, \code{"barplotg"}, \code{"pointplotg"} or
-  \code{"boxplotb"}.}
+\code{"barplotb"}, \code{"barplotg"}, \code{"pointplotg"} or
+\code{"boxplotb"}.}
 
 \item{graph.col}{Color used in the graphs.}
 
-\item{xlab,ylab}{Axis labels.}
+\item{xlab, ylab}{Axis labels.}
 
 \item{main}{Title of the graph.}
 
 \item{graph.den}{Density of the shading lines of the bars
-  (\code{"barplotb"}); \code{NULL} for solid bars.}
+(\code{"barplotb"}); \code{NULL} for solid bars.}
 
 \item{mcomp}{Multiple comparison test: \code{"tukey"} (default),
-  \code{"duncan"}, \code{"lsd"}, \code{"snk"}, \code{"scottknott"} (or
-  \code{"sk"}) or \code{"scheffe"}.}
+\code{"duncan"}, \code{"lsd"}, \code{"snk"}, \code{"scottknott"} (or
+\code{"sk"}) or \code{"scheffe"}.}
 
 \item{best.fit}{Logical. Passed to \code{\link{reg.poly}}: if \code{TRUE}
-  (default), only the best regression model is drawn.}
+(default), only the best regression model is drawn.}
 
 \item{sigF}{Significance level of the F test and of the multiple
-  comparison test (default 0.05).}
+comparison test (default 0.05).}
 
 \item{block}{Vector with the blocks (\code{anova_rbd}).}
 
-\item{row,column}{Vectors with the rows and columns (\code{latsd}).}
+\item{row, column}{Vectors with the rows and columns (\code{latsd}).}
 
 \item{sigT}{Significance level of the multiple comparison test
-  (\code{latsd} only; default 0.05).}
+(\code{latsd} only; default 0.05).}
 }
 \value{
 Invisibly, a list with the elements \code{Anova} (ANOVA table),

@@ -18,10 +18,10 @@ pon_mean(x, w, na.rm = TRUE)
 }
 \arguments{
 \item{x}{Numeric vector. For \code{geo_mean} and \code{har_mean} all
-  values must be positive.}
+values must be positive.}
 
 \item{na.rm}{Logical. If \code{TRUE} (default), missing values are removed
-  before the computation.}
+before the computation.}
 
 \item{w}{Numeric vector of weights, with the same length as \code{x}.}
 }

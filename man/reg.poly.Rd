@@ -4,31 +4,43 @@
 \alias{reg.poly}
 \title{Polynomial regression for quantitative treatments}
 \usage{
-reg.poly(resp, treat, DFerror, SSerror, DFtreat, SStreat, main = "", xlab = "",
-  ylab = "", graph = TRUE, best.fit = FALSE, alpha = 0.05)
+reg.poly(
+  resp,
+  treat,
+  DFerror,
+  SSerror,
+  DFtreat,
+  SStreat,
+  main = "",
+  xlab = "",
+  ylab = "",
+  graph = TRUE,
+  best.fit = FALSE,
+  alpha = 0.05
+)
 }
 \arguments{
 \item{resp}{Numeric vector with the response variable.}
 
 \item{treat}{Vector with the (numeric) levels of the quantitative factor.}
 
-\item{DFerror,SSerror}{Degrees of freedom and sum of squares of the error.}
+\item{DFerror, SSerror}{Degrees of freedom and sum of squares of the error.}
 
-\item{DFtreat,SStreat}{Degrees of freedom and sum of squares of the
-  treatments (or of the factor inside a level of another factor).}
+\item{DFtreat, SStreat}{Degrees of freedom and sum of squares of the
+treatments (or of the factor inside a level of another factor).}
 
 \item{main}{Subtitle of the graph.}
 
-\item{xlab,ylab}{Axis labels.}
+\item{xlab, ylab}{Axis labels.}
 
 \item{graph}{Logical. If \code{TRUE} (default), the graph is drawn.}
 
 \item{best.fit}{Logical. If \code{TRUE}, only the best model is drawn:
-  the model of highest degree whose highest-degree term is significant.
-  If \code{FALSE} (default), all fitted models are drawn.}
+the model of highest degree whose highest-degree term is significant.
+If \code{FALSE} (default), all fitted models are drawn.}
 
 \item{alpha}{Significance level used to choose the best model and to
-  mark significant coefficients with \code{*} (default 0.05).}
+mark significant coefficients with \code{*} (default 0.05).}
 }
 \value{
 Invisibly, a list with the ANOVA of each model
